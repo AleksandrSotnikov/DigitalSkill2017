@@ -22,6 +22,7 @@ namespace DigitalSkills2017
         public AdminMenu()
         {
             InitializeComponent();
+            cbOffice.ItemsSource = Manager.db.Offices.Select(n => n.Title).ToList();
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
