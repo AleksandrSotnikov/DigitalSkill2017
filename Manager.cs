@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace DigitalSkills2017
 {
-    class Manager
+    public static class Manager
     {
         public static Frame MainFrame { get; set; }
     }

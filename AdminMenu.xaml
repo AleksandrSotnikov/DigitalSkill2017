@@ -21,6 +21,7 @@
             <TextBlock Text="Офис: " Margin="5"></TextBlock>
             <ComboBox Width="128" Margin="5"></ComboBox>
         </StackPanel>
+        <DataGrid Grid.Row="2"></DataGrid>
         <StackPanel Grid.Row="3" Orientation ="Horizontal">
             <Button Content="Сменить роль" Margin="10"/>
             <Button Content="Активировать/Дезактивировать аккаунт" Margin="10"/>
