@@ -14,7 +14,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
-            <MenuItem Header="Exit"></MenuItem>
+            <MenuItem Header="Exit" Click="MenuItemExit_Click"></MenuItem>
         </Menu>
         <TextBlock Text="Hi, username, Welcome to AMONIC airLine" Grid.Row ="1"></TextBlock>
         <StackPanel Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Right">

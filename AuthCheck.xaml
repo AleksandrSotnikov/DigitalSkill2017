@@ -17,7 +17,7 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <RadioButton Content="Софт"  Margin="50,10,10,10"></RadioButton>
             <RadioButton Content="Система"  Margin="50,10,10,0"></RadioButton>
-            <Button Content="Confirm" Margin="50,0,10,0" Height="20" Width="100"></Button>
+            <Button Name="Close" Content="Confirm" Margin="50,0,10,0" Height="20" Width="100" Click="Close_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

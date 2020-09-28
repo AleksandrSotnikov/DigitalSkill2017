@@ -23,5 +23,10 @@ namespace DigitalSkills2017
         {
             InitializeComponent();
         }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Owner.Close();
+        }
     }
 }

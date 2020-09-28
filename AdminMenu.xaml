@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="Добавить пользователя"></MenuItem>
-            <MenuItem Header="Выход" Click="MenuItem_Click"></MenuItem>
+            <MenuItem Header="Выход" Click="MenuItemExit_Click"></MenuItem>
         </Menu>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="Офис: " Margin="5"></TextBlock>

@@ -40,7 +40,7 @@
         </StackPanel>
         <StackPanel Grid.Row="5"  Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content ="Принять" Height="40" Width="100" Margin="10"></Button>
-            <Button Content ="Отмена" Height="40" Width="100" Margin="10"></Button>
+            <Button Name ="Close" Content ="Отмена" Height="40" Width="100" Margin="10" Click="Close_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>
