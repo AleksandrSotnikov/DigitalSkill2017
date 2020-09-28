@@ -26,7 +26,7 @@ namespace DigitalSkills2017
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            Close();
         }
     }
 }

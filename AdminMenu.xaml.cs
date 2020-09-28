@@ -26,7 +26,13 @@ namespace DigitalSkills2017
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            Application.Current.MainWindow.Visibility = Visibility.Visible;
+            Close();
+        }
+
+        private void MenuItemAddUser_Click(object sender,RoutedEventArgs e)
+        {
+            new AddUser().Show();
         }
     }
 }

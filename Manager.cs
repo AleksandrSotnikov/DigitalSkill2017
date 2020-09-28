@@ -10,5 +10,6 @@ namespace DigitalSkills2017
     public static class Manager
     {
         public static Frame MainFrame { get; set; }
+        public static dbDigitalSkills2017Entities db;
     }
 }

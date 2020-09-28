@@ -25,7 +25,7 @@ namespace DigitalSkills2017
             InitializeComponent();
             MainFrame.Navigate(new Login());
             Manager.MainFrame = MainFrame;
-          
+            Manager.db = new dbDigitalSkills2017Entities();
         }
     }
 }

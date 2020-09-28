@@ -20,6 +20,7 @@ namespace DigitalSkills2017
     /// </summary>
     public partial class Login : Page
     {
+        Window window;
         public Login()
         {
             InitializeComponent();
@@ -32,7 +33,25 @@ namespace DigitalSkills2017
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+             
+            try
+            {
+                int Role = Manager.db.Users.FirstOrDefault(n => n.Email == tbxLogin.Text && n.Password == tbxPassword.Text).RoleID;
+                switch (Role)
+                {
+                    case 1:
+                        new AdminMenu().Show();
+                        break;
+                    case 2:
+                        new UserMenu().Show();
+                        break;
+                }
+                Application.Current.MainWindow.Visibility = Visibility.Hidden;
+            }
+            catch
+            {
+                MessageBox.Show("Некорректные данные");
+            }
         }
     }
 }

@@ -22,11 +22,12 @@ namespace DigitalSkills2017
         public AddUser()
         {
             InitializeComponent();
+            cbOffice.ItemsSource = Manager.db.Offices.ToList();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            this.Owner.Close();
+            Close();
         }
     }
 }
