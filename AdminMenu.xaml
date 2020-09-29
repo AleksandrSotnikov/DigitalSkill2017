@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DigitalSkills2017"
         mc:Ignorable="d"
-        Title="AdminMenu" Height="450" Width="800">
+        Title="AdminMenu" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -21,7 +21,7 @@
             <TextBlock Text="Офис: " Margin="5"></TextBlock>
             <ComboBox Name="cbOffice" Width="128" Margin="5"></ComboBox>
         </StackPanel>
-        <DataGrid Grid.Row="2"></DataGrid>
+        <DataGrid Name="dgView" Grid.Row="2"></DataGrid>
         <StackPanel Grid.Row="3" Orientation ="Horizontal">
             <Button Content="Сменить роль" Margin="10"/>
             <Button Content="Активировать/Дезактивировать аккаунт" Margin="10"/>

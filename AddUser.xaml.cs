@@ -32,39 +32,53 @@ namespace DigitalSkills2017
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if(tbEmail.Text!=null && tbEmail.Text.Contains('@') && tbEmail.Text.IndexOf('@') == tbEmail.Text.LastIndexOf('@') && tbEmail.Text.Contains('.')&&(tbEmail.Text.Length>5))
+            if (tbEmail.Text != null && tbEmail.Text.Contains('@') && tbEmail.Text.IndexOf('@') == tbEmail.Text.LastIndexOf('@') && tbEmail.Text.Contains('.') && (tbEmail.Text.Length > 5))
             {
-                if(tbFirstName.Text.Length >=1 && tbLastName.Text.Length >= 1)
+                int i = Manager.db.Users.Where(n => n.Email == tbEmail.Text).Count();
+                if (i == 0)
                 {
-                    if(tbBirthday.Text.Length==8 && tbBirthday.Text.IndexOf("/")==2 && tbBirthday.Text.LastIndexOf("/") == 5)
+                    if (tbFirstName.Text.Length >= 1 && tbLastName.Text.Length >= 1)
                     {
-                        if (cbOffice.SelectedIndex > 0)
+                        if (tbBirthday.Text.Length == 8 && tbBirthday.Text.IndexOf("/") == 2 && tbBirthday.Text.LastIndexOf("/") == 5)
                         {
-                            if (tbPassword.Text.Length > 1)
+                            if (cbOffice.SelectedIndex >= 0)
                             {
-                                Users users = new Users();
-                                users.RoleID = 2; 
-                                users.FirstName =tbFirstName.Text;
-                                users.LastName =tbLastName.Text;
-                                users.Email =tbEmail.Text;
-                                users.Password = tbPassword.Text;
-                                users.OfficeID = Manager.db.Offices.Where(n => n.Title == cbOffice.Text).Select(j => j.ID).ToArray()[0];
-                                users.Birthdate = new DateTime();
-                                users.Active = true;
-                                Manager.db.Users.Add(users);
-                                try
+                                if (tbPassword.Text.Length > 1)
                                 {
-                                    Manager.db.SaveChanges();
+                                    Users users = new Users
+                                    {
+                                        RoleID = 2,
+                                        FirstName = tbFirstName.Text,
+                                        LastName = tbLastName.Text,
+                                        Email = tbEmail.Text,
+                                        Password = tbPassword.Text,
+                                        OfficeID = Manager.db.Offices.Where(n => n.Title == cbOffice.Text).Select(j => j.ID).ToArray()[0],
+                                        Birthdate = new DateTime(),
+                                        Active = true
+                                    };
+                                    Manager.db.Users.Add(users);
+                                    try
+                                    {
+                                        Manager.db.SaveChanges();
+                                    }
+                                    catch (System.Data.Entity.Infrastructure.DbUpdateException)
+                                    {
+                                        MessageBox.Show("Ошибка добавления");
+
+                                    }
                                     MessageBox.Show("Save");
                                 }
-                                catch
-                                {
-                                    MessageBox.Show("ОШИБКА при сохранении в БД, возмложно email зарегистрирован");
-                                }
-                                
                             }
                         }
+                        else
+                        {
+                            MessageBox.Show("Введите дату Рождения в формате dd/mm/yy");
+                        }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Email Уже зарегистрирован");
                 }
             }
         }

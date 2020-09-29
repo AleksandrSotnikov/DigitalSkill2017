@@ -23,6 +23,7 @@ namespace DigitalSkills2017
         {
             InitializeComponent();
             cbOffice.ItemsSource = Manager.db.Offices.Select(n => n.Title).ToList();
+            dgView.ItemsSource = Manager.db.Users.Select(n => new {n.FirstName, n.LastName , n.Birthdate, n.Roles.Title, n.Email, OfficeTitle = n.Offices.Title }).ToList();  
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
@@ -34,6 +35,12 @@ namespace DigitalSkills2017
         private void MenuItemAddUser_Click(object sender,RoutedEventArgs e)
         {
             new AddUser().Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            string[] headers = { "Имя", "Фамилия", "Дата Рождения", "Роль", "Email", "Офис" };
+            Manager.fillDg(dgView, headers);
         }
     }
 }
