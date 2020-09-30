@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="dbDigitalSkills2017Model.Offices" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="dbDigitalSkills2017Model.Roles" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dbDigitalSkills2017Model.Users" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbDigitalSkills2017Model.LoginUsers" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbDigitalSkills2017Model.LoginUsers" Width="1.5" PointX="8.25" PointY="1.75" IsExpanded="true" />
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Office_Country" ManuallyRouted="false" />
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Users_Offices" ManuallyRouted="false" />
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Users_Roles" ManuallyRouted="false" />

@@ -52,6 +52,15 @@ namespace DigitalSkills2017
                         new UserMenu().Show();
                         break;
                 }
+                LoginUsers loginUsers = new LoginUsers
+                {
+                    UserID = Manager.db.Users.FirstOrDefault(n => n.Email == tbxLogin.Text).ID,
+                    DateTimeLogin = DateTime.Now,
+                    DateTimeExit = DateTime.Today,
+                    Cause = "System"
+                };
+                Manager.db.LoginUsers.Add(loginUsers);
+                Manager.db.SaveChanges();
                 Application.Current.MainWindow.Visibility = Visibility.Hidden;
             }
             catch

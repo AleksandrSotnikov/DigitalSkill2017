@@ -40,8 +40,7 @@ namespace DigitalSkills2017
 
         private void cbOffice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MessageBox.Show(cbOffices.Text);
-            dgView.ItemsSource = Manager.db.Users.Where(n => n.Offices.Title == cbOffices.Text).ToList();
+            dgView.ItemsSource = Manager.db.Users.Where(n => n.Offices.Title == ((Offices)((ComboBox)sender).SelectedItem).Title.ToString()).ToList();
         }
 
         private void EditRole_Click(object sender, RoutedEventArgs e)
@@ -68,5 +67,6 @@ namespace DigitalSkills2017
             Manager.db.SaveChanges();
             dgView.ItemsSource = Manager.db.Users.ToList();
         }
+
     }
 }
