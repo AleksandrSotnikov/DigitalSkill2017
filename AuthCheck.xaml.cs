@@ -34,6 +34,7 @@ namespace DigitalSkills2017
         {
             if (((LoginUsers)e.Row.Item).Cause == "Soft") e.Row.Background = new SolidColorBrush(Colors.Red);
             if (((LoginUsers)e.Row.Item).Cause == "System") e.Row.Background = new SolidColorBrush(Colors.Green);
+
         }
 
         private void Soft_Checked(object sender, RoutedEventArgs e)

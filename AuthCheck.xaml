@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Ваши последние авторизации:" Margin ="5" Grid.Row="0" FontSize="18"></TextBlock>
+        <TextBlock Text="Последние авторизации пользователей:" Margin ="5" Grid.Row="0" FontSize="18"></TextBlock>
         <DataGrid Name ="dgView" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="dgView_LoadingRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding UserID}" Width="*"></DataGridTextColumn>
