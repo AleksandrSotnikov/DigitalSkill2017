@@ -30,7 +30,7 @@
         </StackPanel>
         <StackPanel Grid.Row="3" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="Офис" Height="20" Margin="10"></TextBlock>
-            <ComboBox Name="cbOffice" ItemsSource="{Binding Offices.Title}" DisplayMemberPath="Offices.Title" Height="20" Width="250" Margin="10"></ComboBox>
+            <ComboBox Name="cbOffice" ItemsSource="{Binding Offices}" DisplayMemberPath="Title" Height="20" Width="250" Margin="10"></ComboBox>
         </StackPanel>
         <StackPanel Grid.Row="4" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="День Рождения" Height="20" Margin="10"></TextBlock>

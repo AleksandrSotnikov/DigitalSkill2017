@@ -19,7 +19,7 @@
         </Menu>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="Офис: " Margin="5"></TextBlock>
-            <ComboBox Name="cbOffices" DisplayMemberPath="Title"  Width="128" Margin="5" SelectionChanged="cbOffice_SelectionChanged" ></ComboBox>
+            <ComboBox Name="cbOffices" ItemsSource="{Binding Offices}" DisplayMemberPath="Title"  Width="128" Margin="5" SelectionChanged="cbOffice_SelectionChanged" ></ComboBox>
         </StackPanel>
         <DataGrid Name="dgView" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="dgView_LoadingRow">
             <DataGrid.Columns>
