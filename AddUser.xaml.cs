@@ -53,7 +53,7 @@ namespace DigitalSkills2017
                                         Email = tbEmail.Text,
                                         Password = tbPassword.Text,
                                         OfficeID = Manager.db.Offices.Where(n => n.Title == cbOffice.Text).Select(j => j.ID).ToArray()[0],
-                                        Birthdate = new DateTime(),
+                                        Birthdate = Convert.ToDateTime(tbBirthday.Text),
                                         Active = true
                                     };
                                     Manager.db.Users.Add(users);

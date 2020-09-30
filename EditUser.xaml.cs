@@ -19,14 +19,16 @@ namespace DigitalSkills2017
     /// </summary>
     public partial class EditUser : Window
     {
-        public EditUser()
+        private static Users _users = new Users();
+        public EditUser(Users users)
         {
             InitializeComponent();
+            DataContext = users;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            this.Owner.Close();
+            Close();
         }
     }
 }

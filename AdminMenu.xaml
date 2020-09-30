@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DigitalSkills2017"
         mc:Ignorable="d"
-        Title="AdminMenu" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="AdminMenu" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -19,11 +19,20 @@
         </Menu>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="Офис: " Margin="5"></TextBlock>
-            <ComboBox Name="cbOffice" Width="128" Margin="5"></ComboBox>
+            <ComboBox Name="cbOffice" Width="128" Margin="5" SelectionChanged="cbOffice_SelectionChanged" ></ComboBox>
         </StackPanel>
-        <DataGrid Name="dgView" Grid.Row="2"></DataGrid>
+        <DataGrid Name="dgView" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="*"></DataGridTextColumn>
+            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="*"></DataGridTextColumn>
+            <DataGridTextColumn Header="Дата Рождения" Binding="{Binding Birthdate,StringFormat={}{0:dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
+            <DataGridTextColumn Header="Роль" Binding="{Binding Roles.Title}" Width="*"></DataGridTextColumn>
+            <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"></DataGridTextColumn>
+            <DataGridTextColumn Header="Офис" Binding="{Binding Offices.Title}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <StackPanel Grid.Row="3" Orientation ="Horizontal">
-            <Button Content="Сменить роль" Margin="10"/>
+            <Button Name="EditRole" Content="Сменить роль" Click="EditRole_Click" Margin="10"/>
             <Button Content="Активировать/Дезактивировать аккаунт" Margin="10"/>
         </StackPanel>
     </Grid>

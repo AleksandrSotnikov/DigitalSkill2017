@@ -34,8 +34,8 @@ namespace DigitalSkills2017
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
              
-            try
-            {
+            //try
+            //{
                 int Role = Manager.db.Users.FirstOrDefault(n => n.Email == tbxLogin.Text && n.Password == tbxPassword.Text).RoleID;
                 switch (Role)
                 {
@@ -47,11 +47,11 @@ namespace DigitalSkills2017
                         break;
                 }
                 Application.Current.MainWindow.Visibility = Visibility.Hidden;
-            }
-            catch
-            {
-                MessageBox.Show("Некорректные данные");
-            }
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Некорректные данные");
+            //}
         }
     }
 }
