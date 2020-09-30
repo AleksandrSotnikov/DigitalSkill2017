@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DigitalSkills2017"
         mc:Ignorable="d"
-        Title="AdminMenu" Height="450" Width="800">
+        Title="AdminMenu" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -19,9 +19,9 @@
         </Menu>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBlock Text="Офис: " Margin="5"></TextBlock>
-            <ComboBox Name="cbOffice" Width="128" Margin="5" SelectionChanged="cbOffice_SelectionChanged" ></ComboBox>
+            <ComboBox Name="cbOffices" DisplayMemberPath="Title"  Width="128" Margin="5" SelectionChanged="cbOffice_SelectionChanged" ></ComboBox>
         </StackPanel>
-        <DataGrid Name="dgView" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Name="dgView" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="dgView_LoadingRow">
             <DataGrid.Columns>
             <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="*"></DataGridTextColumn>
             <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="*"></DataGridTextColumn>
@@ -33,7 +33,7 @@
         </DataGrid>
         <StackPanel Grid.Row="3" Orientation ="Horizontal">
             <Button Name="EditRole" Content="Сменить роль" Click="EditRole_Click" Margin="10"/>
-            <Button Content="Активировать/Дезактивировать аккаунт" Margin="10"/>
+            <Button Name="btnActivate" Click="btnActivate_Click" Content="Активировать/Дезактивировать аккаунт" Margin="10"/>
         </StackPanel>
     </Grid>
 </Window>

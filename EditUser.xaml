@@ -20,26 +20,26 @@
             <TextBox Name="tbEmail" Text="{Binding Email}" Height="20"  IsReadOnly="True"  Width="250" Margin="10"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock Text="Имя" Height="20" Margin="10"></TextBlock>
-            <TextBox Height="20" Width="250" Margin="10"></TextBox>
+            <TextBlock Text="Имя"  Height="20" Margin="10"></TextBlock>
+            <TextBox Name="tbxFirstName" Height="20" Text="{Binding FirstName}" Width="250" Margin="10"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="2" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="Фамилия" Height="20" Margin="10"></TextBlock>
-            <TextBox Height="20" Width="250" Margin="10"></TextBox>
+            <TextBox Name="tbxLastName" Height="20" Text="{Binding LastName}" Width="250" Margin="10"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="3" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock Text="Офис" Height="20" Margin="10"></TextBlock>
-            <ComboBox Height="20" Width="250" Margin="10"></ComboBox>
+            <TextBlock Text="Офис"  Height="20" Margin="10"></TextBlock>
+            <ComboBox Height="20" Name="cbOffice" SelectedItem="{Binding Offices}" DisplayMemberPath="Title"  Width="250" Margin="10"></ComboBox>
         </StackPanel>
         <StackPanel Grid.Row="4" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="Роль" Height="20" Margin="10"></TextBlock>
             <StackPanel Orientation="Vertical" Width="250" Margin="10,0">
-                <RadioButton Content="Пользователь" Margin="5"></RadioButton>
-                <RadioButton Content="Администратор" Margin="5"></RadioButton>
+                <RadioButton Name="UserRole"  Content="Пользователь" Margin="5"></RadioButton>
+                <RadioButton Name="AdminRole"  Content="Администратор" Margin="5"></RadioButton>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="5"  Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content ="Принять" Height="40" Width="100" Margin="10"></Button>
+            <Button Name="EnterBtn" Click="EnterBtn_Click" Content ="Принять" Height="40" Width="100" Margin="10"></Button>
             <Button Name ="Close" Content ="Отмена" Height="40" Width="100" Margin="10" Click="Close_Click"></Button>
         </StackPanel>
     </Grid>

@@ -19,11 +19,12 @@ namespace DigitalSkills2017
     /// </summary>
     public partial class AdminMenu : Window
     {
+        
         public AdminMenu()
         {
             InitializeComponent();
-            cbOffice.ItemsSource = Manager.db.Offices.Select(n => n.Title).ToList();
             dgView.ItemsSource = Manager.db.Users.ToList();
+            cbOffices.ItemsSource = Manager.db.Offices.ToList();
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
@@ -39,14 +40,33 @@ namespace DigitalSkills2017
 
         private void cbOffice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dgView.ItemsSource = Manager.db.Users.Where(n=> cbOffice.SelectedItem==n.Offices.Title).ToList();
+            MessageBox.Show(cbOffices.Text);
+            dgView.ItemsSource = Manager.db.Users.Where(n => n.Offices.Title == cbOffices.Text).ToList();
         }
 
         private void EditRole_Click(object sender, RoutedEventArgs e)
         {
-            EditUser ed = new EditUser((Users)dgView.SelectedItem);
+            EditUser ed = new EditUser((Users)dgView.SelectedItem,this);
             ed.Show();
-            //MessageBox.Show(((Users)dgView.SelectedItem).Email.ToString());
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void dgView_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            if (((Users)e.Row.Item).Roles.Title == "Administrator") e.Row.Background = new SolidColorBrush(Colors.Green);
+            if (((Users)e.Row.Item).Active == false) e.Row.Background = new SolidColorBrush(Colors.Red);
+        }
+
+        private void btnActivate_Click(object sender, RoutedEventArgs e)
+        {
+            if (((Users)dgView.SelectedItem) == null) return;
+            ((Users)dgView.SelectedItem).Active = !((Users)dgView.SelectedItem).Active;
+            Manager.db.SaveChanges();
+            dgView.ItemsSource = Manager.db.Users.ToList();
         }
     }
 }

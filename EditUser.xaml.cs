@@ -19,16 +19,38 @@ namespace DigitalSkills2017
     /// </summary>
     public partial class EditUser : Window
     {
-        private static Users _users = new Users();
-        public EditUser(Users users)
+        private static Users _users;
+        private static AdminMenu _window;
+        public EditUser(Users users,AdminMenu window)
         {
+            if(users==null)
+            {
+                MessageBox.Show("Не выбран пользователь");
+                Close_Click(null, null);
+                return;
+            }
             InitializeComponent();
             DataContext = users;
+            cbOffice.ItemsSource = Manager.db.Offices.ToList();
+            if (users.Roles.Title == "User") { UserRole.IsChecked = true; } else { AdminRole.IsChecked = true; }
+            _users = users;
+            _window = window;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void EnterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _users.FirstName = tbxFirstName.Text;
+            _users.LastName = tbxLastName.Text;
+            _users.OfficeID = Manager.db.Offices.FirstOrDefault(n => n.Title == cbOffice.Text).ID;
+            _users.RoleID = UserRole.IsChecked.Value?2:1;
+            Manager.db.SaveChanges();
+            MessageBox.Show("Complete");
+            _window.dgView.ItemsSource = Manager.db.Users.ToList();
         }
     }
 }
