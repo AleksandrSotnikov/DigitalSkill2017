@@ -33,7 +33,6 @@ namespace DigitalSkills2017
             Application.Current.MainWindow.Visibility = Visibility.Visible;
             _loginUsers.DateTimeExit = DateTime.Now;
             _loginUsers.Cause = "System";
-            Manager.db.LoginUsers.Add(_loginUsers);
             Manager.db.SaveChanges();
             Close();
         }

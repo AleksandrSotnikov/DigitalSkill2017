@@ -25,8 +25,14 @@ namespace DigitalSkills2017
             InitializeComponent();
             _loginUsers = loginUsers;
             tbHello.Text = "Hi, " + Manager.db.Users.FirstOrDefault(n=>n.ID==loginUsers.UserID).FirstName + " " + Manager.db.Users.FirstOrDefault(n => n.ID == loginUsers.UserID).LastName + ", Welcome to AMONIC AirLine.";
-            tbTimeSpent.Text = "Time spent on System: ";
-            tbNumber.Text = "Number of crashes: ";
+            var list = Manager.db.LoginUsers.Where(n => n.Cause == "System" && n.UserID == loginUsers.UserID).ToList();
+            DateTime dt = new DateTime();
+            for(int i = 0; i < list.Count; i++)
+            {
+               dt+= list[i].DateTimeExit - list[i].DateTimeLogin;
+            }
+            tbTimeSpent.Text = "Time spent on System: " + dt.Hour +":"+ dt.Minute+":"+dt.Second;
+            tbNumber.Text = "Number of crashes: " + Manager.db.LoginUsers.Where(n=>n.Cause == "Soft" && n.UserID==loginUsers.UserID).Count();
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
@@ -34,9 +40,13 @@ namespace DigitalSkills2017
             Application.Current.MainWindow.Visibility = Visibility.Visible;
             _loginUsers.DateTimeExit = DateTime.Now;
             _loginUsers.Cause = "System";
-            Manager.db.LoginUsers.Add(_loginUsers);
             Manager.db.SaveChanges();
             Close();
+        }
+
+        private void dgView_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+
         }
     }
 }

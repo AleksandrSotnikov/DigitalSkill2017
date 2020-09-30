@@ -21,7 +21,9 @@
             <TextBlock Name="tbTimeSpent" Text="Time spent on System : " Margin="0,0,10,0"></TextBlock>
             <TextBlock Name="tbNumber" Text="Number of crashes : " Margin="0,0,10,0"></TextBlock>
         </StackPanel>
-        <DataGrid Grid.Row="3"></DataGrid>
+        <DataGrid Name ="dgView" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="dgView_LoadingRow">
+            
+        </DataGrid>
 
     </Grid>
 </Window>

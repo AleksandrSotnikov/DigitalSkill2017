@@ -46,7 +46,7 @@ namespace DigitalSkills2017
                 {
                     UserID = Manager.db.Users.FirstOrDefault(n => n.Email == tbxLogin.Text).ID,
                     DateTimeLogin = DateTime.Now,
-                    DateTimeExit =  DateTime.Today,
+                    DateTimeExit =  DateTime.Now,
                     Cause = "Soft"
                 };
                 switch (Role)
