@@ -22,11 +22,17 @@ namespace DigitalSkills2017
         public AuthCheck()
         {
             InitializeComponent();
+            dgView.ItemsSource = Manager.db.LoginUsers.ToList();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            this.Owner.Close();
+            Close();
+        }
+
+        private void dgView_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+
         }
     }
 }

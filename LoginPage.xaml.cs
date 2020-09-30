@@ -20,7 +20,6 @@ namespace DigitalSkills2017
     /// </summary>
     public partial class Login : Page
     {
-        Window window;
         public Login()
         {
             InitializeComponent();
@@ -34,8 +33,8 @@ namespace DigitalSkills2017
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
              
-            //try
-            //{
+            try
+            {
                 int Role = Manager.db.Users.FirstOrDefault(n => n.Email == tbxLogin.Text && n.Password == tbxPassword.Text).RoleID;
                 bool? Active = Manager.db.Users.FirstOrDefault(n => n.Email == tbxLogin.Text && n.Password == tbxPassword.Text).Active;
                 if (!Active.Value)
@@ -54,6 +53,7 @@ namespace DigitalSkills2017
                 {
                     case 1:
                         new AdminMenu(loginUsers).Show();
+                        new AuthCheck().Show();
                         break;
                     case 2:
                         new UserMenu(loginUsers).Show();
@@ -62,11 +62,11 @@ namespace DigitalSkills2017
                 Manager.db.LoginUsers.Add(loginUsers);
                 Manager.db.SaveChanges();
                 Application.Current.MainWindow.Visibility = Visibility.Hidden;
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Некорректные данные");
-            //}
+            }
+            catch
+            {
+                MessageBox.Show("Некорректные данные");
+            }
         }
     }
 }

@@ -13,7 +13,14 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Ваши последние авторизации:" Margin ="5" Grid.Row="0" FontSize="18"></TextBlock>
-        <DataGrid Grid.Row="2"></DataGrid>
+        <DataGrid Name ="dgView" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="dgView_LoadingRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding UserID}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время входа" Binding="{Binding DateTimeLogin,StringFormat={}{0:dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время выхода" Binding="{Binding DateTimeExit,StringFormat={}{0:dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Причина" Binding="{Binding Cause}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <RadioButton Content="Софт"  Margin="50,10,10,10"></RadioButton>
             <RadioButton Content="Система"  Margin="50,10,10,0"></RadioButton>
