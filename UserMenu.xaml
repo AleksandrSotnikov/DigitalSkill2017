@@ -22,7 +22,13 @@
             <TextBlock Name="tbNumber" Text="Number of crashes : " Margin="0,0,10,0"></TextBlock>
         </StackPanel>
         <DataGrid Name ="dgView" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="dgView_LoadingRow">
-            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Binding="{Binding DateTimeLogin,StringFormat={}{0:dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время входа" Binding="{Binding DateTimeLogin,StringFormat={}{0:hh:mm:ss}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время выхода" Binding="{Binding DateTimeExit,StringFormat={}{0:hh:mm:ss}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время в системе" Binding="{Binding DateTimeLogin,StringFormat={}{0:hh:mm:ss}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Причина" Binding="{Binding Cause}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
         </DataGrid>
 
     </Grid>

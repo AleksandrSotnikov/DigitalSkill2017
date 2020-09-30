@@ -33,6 +33,7 @@ namespace DigitalSkills2017
             }
             tbTimeSpent.Text = "Time spent on System: " + dt.Hour +":"+ dt.Minute+":"+dt.Second;
             tbNumber.Text = "Number of crashes: " + Manager.db.LoginUsers.Where(n=>n.Cause == "Soft" && n.UserID==loginUsers.UserID).Count();
+            dgView.ItemsSource = Manager.db.LoginUsers.Where(n => n.UserID == loginUsers.UserID).ToList();
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
@@ -46,7 +47,8 @@ namespace DigitalSkills2017
 
         private void dgView_LoadingRow(object sender, DataGridRowEventArgs e)
         {
-
+            if (((LoginUsers)e.Row.Item).Cause == "Soft") e.Row.Background = new SolidColorBrush(Colors.Green);
+            if (((LoginUsers)e.Row.Item).Cause == "System") e.Row.Background = new SolidColorBrush(Colors.Red);
         }
     }
 }
