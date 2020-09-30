@@ -19,17 +19,22 @@ namespace DigitalSkills2017
     /// </summary>
     public partial class AdminMenu : Window
     {
-        
-        public AdminMenu()
+        private static LoginUsers _loginUsers;
+        public AdminMenu(LoginUsers loginUsers)
         {
             InitializeComponent();
             dgView.ItemsSource = Manager.db.Users.ToList();
             cbOffices.ItemsSource = Manager.db.Offices.ToList();
+            _loginUsers = loginUsers;
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Visibility = Visibility.Visible;
+            _loginUsers.DateTimeExit = DateTime.Now;
+            _loginUsers.Cause = "System";
+            Manager.db.LoginUsers.Add(_loginUsers);
+            Manager.db.SaveChanges();
             Close();
         }
 

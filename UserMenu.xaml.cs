@@ -19,14 +19,20 @@ namespace DigitalSkills2017
     /// </summary>
     public partial class UserMenu : Window
     {
-        public UserMenu()
+        private static LoginUsers _loginUsers;
+        public UserMenu(LoginUsers loginUsers)
         {
             InitializeComponent();
+            _loginUsers = loginUsers;
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Visibility = Visibility.Visible;
+            _loginUsers.DateTimeExit = DateTime.Now;
+            _loginUsers.Cause = "System";
+            Manager.db.LoginUsers.Add(_loginUsers);
+            Manager.db.SaveChanges();
             Close();
         }
     }

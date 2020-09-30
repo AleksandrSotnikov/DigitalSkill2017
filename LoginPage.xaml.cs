@@ -34,8 +34,8 @@ namespace DigitalSkills2017
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
              
-            try
-            {
+            //try
+            //{
                 int Role = Manager.db.Users.FirstOrDefault(n => n.Email == tbxLogin.Text && n.Password == tbxPassword.Text).RoleID;
                 bool? Active = Manager.db.Users.FirstOrDefault(n => n.Email == tbxLogin.Text && n.Password == tbxPassword.Text).Active;
                 if (!Active.Value)
@@ -43,30 +43,30 @@ namespace DigitalSkills2017
                     MessageBox.Show("Пользователь деактивирован");
                     return;
                 }
-                switch (Role)
-                {
-                    case 1:
-                        new AdminMenu().Show();
-                        break;
-                    case 2:
-                        new UserMenu().Show();
-                        break;
-                }
                 LoginUsers loginUsers = new LoginUsers
                 {
                     UserID = Manager.db.Users.FirstOrDefault(n => n.Email == tbxLogin.Text).ID,
                     DateTimeLogin = DateTime.Now,
-                    DateTimeExit = DateTime.Today,
-                    Cause = "System"
+                    DateTimeExit =  DateTime.Today,
+                    Cause = "Soft"
                 };
+                switch (Role)
+                {
+                    case 1:
+                        new AdminMenu(loginUsers).Show();
+                        break;
+                    case 2:
+                        new UserMenu(loginUsers).Show();
+                        break;
+                }
                 Manager.db.LoginUsers.Add(loginUsers);
                 Manager.db.SaveChanges();
                 Application.Current.MainWindow.Visibility = Visibility.Hidden;
-            }
-            catch
-            {
-                MessageBox.Show("Некорректные данные");
-            }
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Некорректные данные");
+            //}
         }
     }
 }
