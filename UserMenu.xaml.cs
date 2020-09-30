@@ -25,6 +25,8 @@ namespace DigitalSkills2017
             InitializeComponent();
             _loginUsers = loginUsers;
             tbHello.Text = "Hi, " + Manager.db.Users.FirstOrDefault(n=>n.ID==loginUsers.UserID).FirstName + " " + Manager.db.Users.FirstOrDefault(n => n.ID == loginUsers.UserID).LastName + ", Welcome to AMONIC AirLine.";
+            tbTimeSpent.Text = "Time spent on System: ";
+            tbNumber.Text = "Number of crashes: ";
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
