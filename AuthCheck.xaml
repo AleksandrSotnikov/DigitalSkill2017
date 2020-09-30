@@ -16,14 +16,14 @@
         <DataGrid Name ="dgView" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="dgView_LoadingRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding UserID}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Время входа" Binding="{Binding DateTimeLogin,StringFormat={}{0:dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Время выхода" Binding="{Binding DateTimeExit,StringFormat={}{0:dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время входа" Binding="{Binding DateTimeLogin,StringFormat={}{0:hh:mm dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время выхода" Binding="{Binding DateTimeExit,StringFormat={}{0:hh:mm dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Причина" Binding="{Binding Cause}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <RadioButton Content="Софт"  Margin="50,10,10,10"></RadioButton>
-            <RadioButton Content="Система"  Margin="50,10,10,0"></RadioButton>
+            <RadioButton Name ="Soft" Content="Софт" Margin="50,10,10,10" Checked="Soft_Checked"></RadioButton>
+            <RadioButton Name ="Systems" Content="Система"  Margin="50,10,10,0" Checked="System_Checked"></RadioButton>
             <Button Name="Close" Content="Confirm" Margin="50,0,10,0" Height="20" Width="100" Click="Close_Click"></Button>
         </StackPanel>
     </Grid>
