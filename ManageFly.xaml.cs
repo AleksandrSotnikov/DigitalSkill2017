@@ -22,6 +22,8 @@ namespace DigitalSkills2017
         public ManageFly()
         {
             InitializeComponent();
+            Manager.db = new dbDigitalSkills2017Entities();
+            dgView.ItemsSource = Manager.db.Schedules.ToList();
         }
     }
 }

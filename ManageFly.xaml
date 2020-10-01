@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DigitalSkills2017"
         mc:Ignorable="d"
         Title="ManageFly" Height="450" Width="800">
-    <Grid>
+    <Grid DataContext="Manager.db">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -33,9 +33,9 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Время" Binding="{Binding Time}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Откуда" Binding="{Binding Date}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Куда" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Номер полета" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Откуда" Binding="{Binding Airports1.Name}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Куда"  Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Номер полета" Binding="{Binding FlightNumber}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Самолет" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Эконом-Класс" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Бизнес-Класс" Width="*"></DataGridTextColumn>

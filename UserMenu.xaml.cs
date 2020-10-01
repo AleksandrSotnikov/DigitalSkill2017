@@ -34,6 +34,10 @@ namespace DigitalSkills2017
             tbTimeSpent.Text = "Time spent on System: " + dt.Hour +":"+ dt.Minute+":"+dt.Second;
             tbNumber.Text = "Number of crashes: " + Manager.db.LoginUsers.Where(n=>n.Cause == "Soft" && n.UserID==loginUsers.UserID).Count();
             dgView.ItemsSource = Manager.db.LoginUsers.Where(n => n.UserID == loginUsers.UserID).ToList();
+            Binding binding = new Binding();
+              int[] s ={ 1,2,3,4,5,6,7};
+            binding.Source = s;
+
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
