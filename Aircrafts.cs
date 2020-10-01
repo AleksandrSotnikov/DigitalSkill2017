@@ -12,21 +12,22 @@ namespace DigitalSkills2017
     using System;
     using System.Collections.Generic;
     
-    public partial class Countries
+    public partial class Aircrafts
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Countries()
+        public Aircrafts()
         {
-            this.Offices = new HashSet<Offices>();
-            this.Airports = new HashSet<Airports>();
+            this.Schedules = new HashSet<Schedules>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
+        public string MakeModel { get; set; }
+        public int TotalSeats { get; set; }
+        public int EconomySeats { get; set; }
+        public int BusinessSeats { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Offices> Offices { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Airports> Airports { get; set; }
+        public virtual ICollection<Schedules> Schedules { get; set; }
     }
 }

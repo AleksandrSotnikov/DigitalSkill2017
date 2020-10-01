@@ -30,5 +30,9 @@ namespace DigitalSkills2017
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<LoginUsers> LoginUsers { get; set; }
+        public virtual DbSet<Aircrafts> Aircrafts { get; set; }
+        public virtual DbSet<Airports> Airports { get; set; }
+        public virtual DbSet<Routes> Routes { get; set; }
+        public virtual DbSet<Schedules> Schedules { get; set; }
     }
 }

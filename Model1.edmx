@@ -5,6 +5,26 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Хранилище dbDigitalSkills2017Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aircrafts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MakeModel" Type="nvarchar" MaxLength="10" />
+          <Property Name="TotalSeats" Type="int" Nullable="false" />
+          <Property Name="EconomySeats" Type="int" Nullable="false" />
+          <Property Name="BusinessSeats" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Airports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="IATACode" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Countries">
           <Key>
             <PropertyRef Name="ID" />
@@ -39,6 +59,29 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Routes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartureAirportID" Type="int" Nullable="false" />
+          <Property Name="ArrivalAirportID" Type="int" Nullable="false" />
+          <Property Name="Distance" Type="int" Nullable="false" />
+          <Property Name="FlightTime" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedules">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="5" Nullable="false" />
+          <Property Name="AircraftID" Type="int" Nullable="false" />
+          <Property Name="RouteID" Type="int" Nullable="false" />
+          <Property Name="EconomyPrice" Type="money" Nullable="false" />
+          <Property Name="Confirmed" Type="bit" Nullable="false" />
+          <Property Name="FlightNumber" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="ID" />
@@ -53,6 +96,18 @@
           <Property Name="Birthdate" Type="date" />
           <Property Name="Active" Type="bit" />
         </EntityType>
+        <Association Name="FK_AirPort_Country">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Airports" Type="Self.Airports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Airports">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Office_Country">
           <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
           <End Role="Offices" Type="Self.Offices" Multiplicity="*" />
@@ -62,6 +117,54 @@
             </Principal>
             <Dependent Role="Offices">
               <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Routes_Airports2">
+          <End Role="Airports" Type="Self.Airports" Multiplicity="1" />
+          <End Role="Routes" Type="Self.Routes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Airports">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Routes">
+              <PropertyRef Name="DepartureAirportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Routes_Airports3">
+          <End Role="Airports" Type="Self.Airports" Multiplicity="1" />
+          <End Role="Routes" Type="Self.Routes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Airports">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Routes">
+              <PropertyRef Name="ArrivalAirportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_AirCraft">
+          <End Role="Aircrafts" Type="Self.Aircrafts" Multiplicity="1" />
+          <End Role="Schedules" Type="Self.Schedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aircrafts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="AircraftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Routes">
+          <End Role="Routes" Type="Self.Routes" Multiplicity="1" />
+          <End Role="Schedules" Type="Self.Schedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Routes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="RouteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -102,14 +205,38 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище dbDigitalSkills2017ModelContainer">
+          <EntitySet Name="Aircrafts" EntityType="Self.Aircrafts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Airports" EntityType="Self.Airports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginUsers" EntityType="Self.LoginUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Routes" EntityType="Self.Routes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AirPort_Country" Association="Self.FK_AirPort_Country">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Airports" EntitySet="Airports" />
+          </AssociationSet>
           <AssociationSet Name="FK_Office_Country" Association="Self.FK_Office_Country">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Offices" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Routes_Airports2" Association="Self.FK_Routes_Airports2">
+            <End Role="Airports" EntitySet="Airports" />
+            <End Role="Routes" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Routes_Airports3" Association="Self.FK_Routes_Airports3">
+            <End Role="Airports" EntitySet="Airports" />
+            <End Role="Routes" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_AirCraft" Association="Self.FK_Schedule_AirCraft">
+            <End Role="Aircrafts" EntitySet="Aircrafts" />
+            <End Role="Schedules" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Routes" Association="Self.FK_Schedule_Routes">
+            <End Role="Routes" EntitySet="Routes" />
+            <End Role="Schedules" EntitySet="Schedules" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_LOGIN" Association="Self.FK_Users_LOGIN">
             <End Role="Users" EntitySet="Users" />
@@ -135,6 +262,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Offices" Relationship="Self.FK_Office_Country" FromRole="Countries" ToRole="Offices" />
+          <NavigationProperty Name="Airports" Relationship="dbDigitalSkills2017Model.FK_AirPort_Country" FromRole="Countries" ToRole="Airports" />
         </EntityType>
         <EntityType Name="Offices">
           <Key>
@@ -254,7 +382,143 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="LoginUsers" EntitySet="LoginUsers" />
           </AssociationSet>
+          <EntitySet Name="Aircrafts" EntityType="dbDigitalSkills2017Model.Aircrafts" />
+          <EntitySet Name="Airports" EntityType="dbDigitalSkills2017Model.Airports" />
+          <EntitySet Name="Routes" EntityType="dbDigitalSkills2017Model.Routes" />
+          <EntitySet Name="Schedules" EntityType="dbDigitalSkills2017Model.Schedules" />
+          <AssociationSet Name="FK_Schedule_AirCraft" Association="dbDigitalSkills2017Model.FK_Schedule_AirCraft">
+            <End Role="Aircrafts" EntitySet="Aircrafts" />
+            <End Role="Schedules" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AirPort_Country" Association="dbDigitalSkills2017Model.FK_AirPort_Country">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Airports" EntitySet="Airports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Routes_Airports2" Association="dbDigitalSkills2017Model.FK_Routes_Airports2">
+            <End Role="Airports" EntitySet="Airports" />
+            <End Role="Routes" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Routes_Airports3" Association="dbDigitalSkills2017Model.FK_Routes_Airports3">
+            <End Role="Airports" EntitySet="Airports" />
+            <End Role="Routes" EntitySet="Routes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Routes" Association="dbDigitalSkills2017Model.FK_Schedule_Routes">
+            <End Role="Routes" EntitySet="Routes" />
+            <End Role="Schedules" EntitySet="Schedules" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Aircrafts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MakeModel" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TotalSeats" Type="Int32" Nullable="false" />
+          <Property Name="EconomySeats" Type="Int32" Nullable="false" />
+          <Property Name="BusinessSeats" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Schedules" Relationship="dbDigitalSkills2017Model.FK_Schedule_AirCraft" FromRole="Aircrafts" ToRole="Schedules" />
+        </EntityType>
+        <EntityType Name="Airports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="IATACode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Countries" Relationship="dbDigitalSkills2017Model.FK_AirPort_Country" FromRole="Airports" ToRole="Countries" />
+          <NavigationProperty Name="Routes" Relationship="dbDigitalSkills2017Model.FK_Routes_Airports2" FromRole="Airports" ToRole="Routes" />
+          <NavigationProperty Name="Routes1" Relationship="dbDigitalSkills2017Model.FK_Routes_Airports3" FromRole="Airports" ToRole="Routes" />
+        </EntityType>
+        <EntityType Name="Routes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartureAirportID" Type="Int32" Nullable="false" />
+          <Property Name="ArrivalAirportID" Type="Int32" Nullable="false" />
+          <Property Name="Distance" Type="Int32" Nullable="false" />
+          <Property Name="FlightTime" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Airports" Relationship="dbDigitalSkills2017Model.FK_Routes_Airports2" FromRole="Routes" ToRole="Airports" />
+          <NavigationProperty Name="Airports1" Relationship="dbDigitalSkills2017Model.FK_Routes_Airports3" FromRole="Routes" ToRole="Airports" />
+          <NavigationProperty Name="Schedules" Relationship="dbDigitalSkills2017Model.FK_Schedule_Routes" FromRole="Routes" ToRole="Schedules" />
+        </EntityType>
+        <EntityType Name="Schedules">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="5" />
+          <Property Name="AircraftID" Type="Int32" Nullable="false" />
+          <Property Name="RouteID" Type="Int32" Nullable="false" />
+          <Property Name="EconomyPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Confirmed" Type="Boolean" Nullable="false" />
+          <Property Name="FlightNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Aircrafts" Relationship="dbDigitalSkills2017Model.FK_Schedule_AirCraft" FromRole="Schedules" ToRole="Aircrafts" />
+          <NavigationProperty Name="Routes" Relationship="dbDigitalSkills2017Model.FK_Schedule_Routes" FromRole="Schedules" ToRole="Routes" />
+        </EntityType>
+        <Association Name="FK_Schedule_AirCraft">
+          <End Type="dbDigitalSkills2017Model.Aircrafts" Role="Aircrafts" Multiplicity="1" />
+          <End Type="dbDigitalSkills2017Model.Schedules" Role="Schedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aircrafts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="AircraftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AirPort_Country">
+          <End Type="dbDigitalSkills2017Model.Countries" Role="Countries" Multiplicity="1" />
+          <End Type="dbDigitalSkills2017Model.Airports" Role="Airports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Airports">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Routes_Airports2">
+          <End Type="dbDigitalSkills2017Model.Airports" Role="Airports" Multiplicity="1" />
+          <End Type="dbDigitalSkills2017Model.Routes" Role="Routes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Airports">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Routes">
+              <PropertyRef Name="DepartureAirportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Routes_Airports3">
+          <End Type="dbDigitalSkills2017Model.Airports" Role="Airports" Multiplicity="1" />
+          <End Type="dbDigitalSkills2017Model.Routes" Role="Routes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Airports">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Routes">
+              <PropertyRef Name="ArrivalAirportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Routes">
+          <End Type="dbDigitalSkills2017Model.Routes" Role="Routes" Multiplicity="1" />
+          <End Type="dbDigitalSkills2017Model.Schedules" Role="Schedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Routes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="RouteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -311,6 +575,53 @@
                 <ScalarProperty Name="DateTimeLogin" ColumnName="DateTimeLogin" />
                 <ScalarProperty Name="Cause" ColumnName="Cause" />
                 <ScalarProperty Name="DateTimeExit" ColumnName="DateTimeExit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aircrafts">
+            <EntityTypeMapping TypeName="dbDigitalSkills2017Model.Aircrafts">
+              <MappingFragment StoreEntitySet="Aircrafts">
+                <ScalarProperty Name="BusinessSeats" ColumnName="BusinessSeats" />
+                <ScalarProperty Name="EconomySeats" ColumnName="EconomySeats" />
+                <ScalarProperty Name="TotalSeats" ColumnName="TotalSeats" />
+                <ScalarProperty Name="MakeModel" ColumnName="MakeModel" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Airports">
+            <EntityTypeMapping TypeName="dbDigitalSkills2017Model.Airports">
+              <MappingFragment StoreEntitySet="Airports">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IATACode" ColumnName="IATACode" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Routes">
+            <EntityTypeMapping TypeName="dbDigitalSkills2017Model.Routes">
+              <MappingFragment StoreEntitySet="Routes">
+                <ScalarProperty Name="FlightTime" ColumnName="FlightTime" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="ArrivalAirportID" ColumnName="ArrivalAirportID" />
+                <ScalarProperty Name="DepartureAirportID" ColumnName="DepartureAirportID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="dbDigitalSkills2017Model.Schedules">
+              <MappingFragment StoreEntitySet="Schedules">
+                <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+                <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
+                <ScalarProperty Name="EconomyPrice" ColumnName="EconomyPrice" />
+                <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+                <ScalarProperty Name="AircraftID" ColumnName="AircraftID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

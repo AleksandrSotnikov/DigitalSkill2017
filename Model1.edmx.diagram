@@ -14,6 +14,15 @@
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Users_Offices" ManuallyRouted="false" />
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Users_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Users_LOGIN" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbDigitalSkills2017Model.Aircrafts" Width="1.5" PointX="9.75" PointY="8.375" />
+        <EntityTypeShape EntityType="dbDigitalSkills2017Model.Airports" Width="1.5" PointX="3" PointY="8.375" />
+        <EntityTypeShape EntityType="dbDigitalSkills2017Model.Routes" Width="1.5" PointX="5.5" PointY="8.375" />
+        <EntityTypeShape EntityType="dbDigitalSkills2017Model.Schedules" Width="1.5" PointX="7.75" PointY="8.375" />
+        <AssociationConnector Association="dbDigitalSkills2017Model.FK_Schedule_AirCraft" />
+        <AssociationConnector Association="dbDigitalSkills2017Model.FK_AirPort_Country" />
+        <AssociationConnector Association="dbDigitalSkills2017Model.FK_Routes_Airports2" />
+        <AssociationConnector Association="dbDigitalSkills2017Model.FK_Routes_Airports3" />
+        <AssociationConnector Association="dbDigitalSkills2017Model.FK_Schedule_Routes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

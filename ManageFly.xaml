@@ -31,7 +31,15 @@
         </StackPanel>
         <DataGrid Name="dgView" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время" Binding="{Binding Time}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Откуда" Binding="{Binding Date}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Куда" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Номер полета" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Самолет" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Эконом-Класс" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Бизнес-Класс" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Первый-Класс" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="10">
