@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
@@ -26,7 +27,8 @@ namespace DigitalSkills2017
         {
             InitializeComponent();
             _loginUsers = loginUsers;
-            tbHello.Text = "Hi, " + Manager.db.Users.FirstOrDefault(n=>n.ID==loginUsers.UserID).FirstName + " " + Manager.db.Users.FirstOrDefault(n => n.ID == loginUsers.UserID).LastName + ", Welcome to AMONIC AirLine.";
+            tbHello.Text = "Hi, " + Manager.db.Users.FirstOrDefault(n=>n.ID==loginUsers.UserID).FirstName + " " + Manager.db.Users
+                .FirstOrDefault(n => n.ID == loginUsers.UserID).LastName + ", Welcome to AMONIC AirLine.";
             var qw = Manager.db.LoginUsers.Where(n => n.UserID == loginUsers.UserID).Select(n =>DbFunctions.DiffSeconds(n.DateTimeLogin,n.DateTimeExit )).Sum().Value;      
             var list = Manager.db.LoginUsers.Where(n => n.Cause == "System" && n.UserID == loginUsers.UserID).ToList();
             dtqqq.Text = qw.ToString();
@@ -52,9 +54,7 @@ namespace DigitalSkills2017
 
         private void dgView_LoadingRow(object sender, DataGridRowEventArgs e)
         {
-
-            if (((LoginUsers)e.Row.Item).Cause == "Soft") e.Row.Background = new SolidColorBrush(Colors.Red);
-            if (((LoginUsers)e.Row.Item).Cause == "System") e.Row.Background = new SolidColorBrush(Colors.Green);
+            e.Row.Background = e.Row.Item.ToString().Contains("Soft") ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Green);
         }
     }
 }
