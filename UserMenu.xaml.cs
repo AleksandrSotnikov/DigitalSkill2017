@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +27,14 @@ namespace DigitalSkills2017
             InitializeComponent();
             _loginUsers = loginUsers;
             tbHello.Text = "Hi, " + Manager.db.Users.FirstOrDefault(n=>n.ID==loginUsers.UserID).FirstName + " " + Manager.db.Users.FirstOrDefault(n => n.ID == loginUsers.UserID).LastName + ", Welcome to AMONIC AirLine.";
+            var qw = Manager.db.LoginUsers.Where(n => n.UserID == loginUsers.UserID).Select(n =>DbFunctions.DiffSeconds(n.DateTimeLogin,n.DateTimeExit )).Sum().Value;      
             var list = Manager.db.LoginUsers.Where(n => n.Cause == "System" && n.UserID == loginUsers.UserID).ToList();
-            DateTime dt = new DateTime();
-            for(int i = 0; i < list.Count; i++)
-            {
-               dt+= list[i].DateTimeExit - list[i].DateTimeLogin;
-            }
-            tbTimeSpent.Text = "Time spent on System: " + dt.Hour +":"+ dt.Minute+":"+dt.Second;
+            dtqqq.Text = qw.ToString();
+            tbTimeSpent.Text = "Time spent on System: " + qw/3600+":"+qw%3600/60+":"+qw%60;
             tbNumber.Text = "Number of crashes: " + Manager.db.LoginUsers.Where(n=>n.Cause == "Soft" && n.UserID==loginUsers.UserID).Count();
-            dgView.ItemsSource = Manager.db.LoginUsers.Where(n => n.UserID == loginUsers.UserID).ToList();
+            dgView.ItemsSource = Manager.db.LoginUsers.Where(n => n.UserID == loginUsers.UserID)
+                .Select(q => new { q.DateTimeLogin, q.DateTimeExit, qwe = DbFunctions.DiffSeconds(q.DateTimeLogin, q.DateTimeExit)/3600 + ":" + DbFunctions.DiffSeconds(q.DateTimeLogin, q.DateTimeExit) % 3600/60 + ":" + DbFunctions.DiffSeconds(q.DateTimeLogin, q.DateTimeExit) % 60 ,q.Cause })
+                .ToList();
             Binding binding = new Binding();
               int[] s ={ 1,2,3,4,5,6,7};
             binding.Source = s;
@@ -51,8 +52,9 @@ namespace DigitalSkills2017
 
         private void dgView_LoadingRow(object sender, DataGridRowEventArgs e)
         {
-            if (((LoginUsers)e.Row.Item).Cause == "Soft") e.Row.Background = new SolidColorBrush(Colors.Green);
-            if (((LoginUsers)e.Row.Item).Cause == "System") e.Row.Background = new SolidColorBrush(Colors.Red);
+
+            if (((LoginUsers)e.Row.Item).Cause == "Soft") e.Row.Background = new SolidColorBrush(Colors.Red);
+            if (((LoginUsers)e.Row.Item).Cause == "System") e.Row.Background = new SolidColorBrush(Colors.Green);
         }
     }
 }

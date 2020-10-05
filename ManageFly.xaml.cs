@@ -23,7 +23,8 @@ namespace DigitalSkills2017
         {
             InitializeComponent();
             Manager.db = new dbDigitalSkills2017Entities();
-            dgView.ItemsSource = Manager.db.Schedules.ToList();
+            dgView.ItemsSource = Manager.db.Schedules.Select(n => new { n.Date, n.Time, Departure =  n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode,n.FlightNumber, n.Aircrafts.MakeModel,n.EconomyPrice,Business = (n.EconomyPrice*(Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+
         }
     }
 }

@@ -29,17 +29,17 @@
                 <Button Content="Принять" Width="150" Height="20" Margin="75,5,5,5" HorizontalAlignment="Right"></Button>
             </StackPanel>
         </StackPanel>
-        <DataGrid Name="dgView" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Name="dgView" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Время" Binding="{Binding Time}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Откуда" Binding="{Binding Airports1.Name}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Куда"  Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Откуда" Binding="{Binding Departure}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Куда"  Binding="{Binding Arrival}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Номер полета" Binding="{Binding FlightNumber}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Самолет" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Эконом-Класс" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Бизнес-Класс" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Первый-Класс" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Самолет" Binding="{Binding MakeModel}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Эконом-Класс" Binding="{Binding EconomyPrice}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Бизнес-Класс" Binding="{Binding Business}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Первый-Класс" Binding="{Binding First}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="10">

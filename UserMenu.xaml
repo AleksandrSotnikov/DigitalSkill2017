@@ -17,6 +17,7 @@
             <MenuItem Header="Exit" Click="MenuItemExit_Click"></MenuItem>
         </Menu>
         <TextBlock Name="tbHello" Text="Hi, username, Welcome to AMONIC airLine" Grid.Row ="1"></TextBlock>
+        <TextBlock Name="dtqqq" Text="1" Grid.Row ="2"></TextBlock>
         <StackPanel Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Name="tbTimeSpent" Text="Time spent on System : " Margin="0,0,10,0"></TextBlock>
             <TextBlock Name="tbNumber" Text="Number of crashes : " Margin="0,0,10,0"></TextBlock>
@@ -26,8 +27,8 @@
                 <DataGridTextColumn Header="Дата" Binding="{Binding DateTimeLogin,StringFormat={}{0:dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Время входа" Binding="{Binding DateTimeLogin,StringFormat={}{0:hh:mm:ss}}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Время выхода" Binding="{Binding DateTimeExit,StringFormat={}{0:hh:mm:ss}}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Время в системе" Binding="{Binding DateTimeLogin,StringFormat={}{0:hh:mm:ss}}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Причина" Binding="{Binding binding}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время в системе" Binding="{Binding qwe,StringFormat={}{0:hh:mm:ss}}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Причина" Binding="{Binding Cause}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
