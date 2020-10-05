@@ -15,21 +15,21 @@
         <StackPanel Orientation="Vertical" Margin="10" Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Text="Откуда: " Margin="5"></TextBlock>
-                <ComboBox Width="150" Height="20" Margin="5"></ComboBox>
+                <ComboBox Name="cbFrom"  Width="150" ItemsSource="{Binding IATACode}" Height="20" Margin="5"></ComboBox>
                 <TextBlock Text="Куда: " Margin="5"></TextBlock>
-                <ComboBox Width="150" Height="20" Margin="5"></ComboBox>
+                <ComboBox Name="cbTo" Width="150" Height="20" ItemsSource="{Binding IATACode}" Margin="5"></ComboBox>
                 <TextBlock Text="Сортировать по: " Margin="5"></TextBlock>
-                <ComboBox Width="150" Height="20" Margin="5"></ComboBox>
+                <ComboBox Name ="cbSort" SelectionChanged="cbSort_SelectionChanged" Width="150" Height="20" Margin="5"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Text="Дата: " Margin="5"></TextBlock>
-                <ComboBox Width="150" Height="20" Margin="5"></ComboBox>
+                <TextBox  Width="150" Height="20" Margin="5"></TextBox>
                 <TextBlock Text="Номер рейса: " Margin="5"></TextBlock>
-                <ComboBox Width="150" Height="20" Margin="5"></ComboBox>
+                <ComboBox Name="cbNumber" Width="150" ItemsSource="{Binding FlightNumber}" Height="20" Margin="5"></ComboBox>
                 <Button Content="Принять" Width="150" Height="20" Margin="75,5,5,5" HorizontalAlignment="Right"></Button>
             </StackPanel>
         </StackPanel>
-        <DataGrid Name="dgView" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" >
+        <DataGrid Name="dgView" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"  >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Время" Binding="{Binding Time}" Width="*"></DataGridTextColumn>
