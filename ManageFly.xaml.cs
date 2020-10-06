@@ -49,6 +49,7 @@ namespace DigitalSkills2017
 
         private void FlightEdit_Click(object sender, RoutedEventArgs e)
         {
+            if (dgView.SelectedItem == null) return;
             ShadulesEdit se = new ShadulesEdit(dgView.SelectedItem.ToString(), this);
             se.Show();
         }
@@ -57,6 +58,7 @@ namespace DigitalSkills2017
 
         private void FlightCancel_Click(object sender, RoutedEventArgs e)
         {
+            if (dgView.SelectedItem == null) return;
             string schedules = dgView.SelectedItem.ToString().Substring(dgView.SelectedItem.ToString().IndexOf("=") + 2, dgView.SelectedItem.ToString().IndexOf(",")- dgView.SelectedItem.ToString().IndexOf("=") - 2);
             int _ID = int.Parse(schedules);
             Schedules _sc = Manager.db.Schedules.FirstOrDefault(n => n.ID == _ID);

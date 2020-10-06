@@ -36,28 +36,39 @@ namespace DigitalSkills2017
             {
                 StreamReader fileIn = new StreamReader(new FileStream(oFD.FileName.ToString(), FileMode.Open, FileAccess.Read));
                 string[] s = fileIn.ReadToEnd().Split('\n');
+                int miss = 0;
                 for(int i = 0; i < s.Length; i++)
                 {
+                    this.Title = s[i];
                     string[] q = s[i].Split(',');
                     if (q[0] == "ADD")
                     {
                         //- это действие, дата отправления, время
                        // отправления, номер рейса, международный код аэропорта отправления, международный код
 //аэропорта прибытия, код самолета, базовая цена и подтверждение.
-                        Schedules schedules = new Schedules();
-                        schedules.Date =q[1];
-                        schedules.Time = q[2];
-                        schedules.Routes.Airports.IATACode = q[3];
-                        schedules.Routes.Airports1.IATACode = q[4];
-                        schedules.AircraftID = q[5];
-                        schedules.EconomyPrice = q[6];
-                        if (q[7] == "OK")
+                        
+                        try
                         {
-                            schedules.Confirmed = true;
+                            Schedules schedules = new Schedules();
+                            schedules.Date = Convert.ToDateTime(q[1]);
+                            schedules.Time = new TimeSpan(Convert.ToDateTime(q[2]).Ticks % 864000000000);
+                            schedules.FlightNumber = q[3];
+                            this.Title = q[4];
+                            var q1 = q[4].ToString();
+                            var q2 = q[5].ToString();
+                            int airports = Manager.db.Airports.FirstOrDefault(n => n.IATACode == q1).ID;
+                            int airports1 = Manager.db.Airports.FirstOrDefault(n => n.IATACode == q2).ID;
+                            Routes routes = Manager.db.Routes.FirstOrDefault(n => n.DepartureAirportID == airports && n.ArrivalAirportID == airports1);
+                            schedules.RouteID = routes.ID;
+                            schedules.AircraftID = Convert.ToInt32(q[6]);
+                            q[7] = q[7].Substring(0, q[7].IndexOf('.'));
+                            schedules.EconomyPrice = Convert.ToDecimal(q[7]);
+                            schedules.Confirmed = !(q[8] == "OK");
+                            Manager.db.Schedules.Add(schedules);
                         }
-                        else
+                        catch
                         {
-                            schedules.Confirmed = false;
+                            miss++;
                         }
 
                     }
@@ -66,6 +77,8 @@ namespace DigitalSkills2017
 
                     }
                 }
+                Manager.db.SaveChanges();
+                RecordLabel.Text = miss.ToString();
                 fileIn.Close();
             }
         }
