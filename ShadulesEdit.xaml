@@ -14,21 +14,21 @@
         </Grid.RowDefinitions>
         <StackPanel Margin="10" Orientation="Horizontal" Background="LightGray" Grid.Row="0">
             <TextBlock Text="Flight Route" FontWeight="Bold" Foreground="Black" Background="Gray" VerticalAlignment="Top"/>
-            <TextBlock Name="From"  Text="From: AUH" Margin="0,0,30,0" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Name="To" Text="To: ADE" Margin="30,0,30,0" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Name="Aircraft" Text="Aircarft: Boeing739" Margin="30,0,0,0" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Name="From"  Text="{Binding Routes.Airports.IATACode}" Margin="0,0,30,0" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Name="To" Text="{Binding Routes.Airports1.IATACode}" Margin="30,0,30,0" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Name="Aircraft" Text="{Binding Aircrafts.MakeModel}" Margin="30,0,0,0" VerticalAlignment="Center"></TextBlock>
         </StackPanel>
         <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="1">
             <TextBlock  Text="Date:" VerticalAlignment="Center" Margin="10,0,10,0"></TextBlock>
-            <TextBox Name="Date" VerticalAlignment="Center" Margin="0,0,10,0" Width="100"></TextBox>
+            <TextBox Name="Date" Text="{Binding Date,StringFormat={}{0:dd/MM/yyyy}}"  VerticalAlignment="Center" Margin="0,0,10,0" Width="100"></TextBox>
             <TextBlock  Text="Time:" VerticalAlignment="Center" Margin="10,0,10,0"></TextBlock>
-            <TextBox Name="Time" VerticalAlignment="Center" Margin="0,0,10,0" Width="100"></TextBox>
+            <TextBox Name="Time" Text="{Binding Time}" VerticalAlignment="Center" Margin="0,0,10,0" Width="100"></TextBox>
             <TextBlock Text="Price:" VerticalAlignment="Center" Margin="10,0,10,0"></TextBlock>
-            <TextBox Name="Price" VerticalAlignment="Center" Margin="0,0,10,0" Width="100"></TextBox>
+            <TextBox Name="Price" Text="{Binding EconomyPrice}" VerticalAlignment="Center" Margin="0,0,10,0" Width="100"></TextBox>
         </StackPanel>
         <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-            <Button Content="Confirm" Width="100" Margin="20,0,20,0" VerticalAlignment="Center"></Button>
-            <Button Content="Cancel" Width="100" Margin="20,0,20,0" VerticalAlignment="Center"></Button>
+            <Button Name="Confirm" Content="Confirm" Width="100" Margin="20,0,20,0" Click="Confirm_Click" VerticalAlignment="Center"></Button>
+            <Button Name="Cancel" Content="Cancel" Width="100" Margin="20,0,20,0" Click="Cancel_Click" VerticalAlignment="Center"></Button>
         </StackPanel>
     </Grid>
 </Window>

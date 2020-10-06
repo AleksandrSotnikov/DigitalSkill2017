@@ -31,6 +31,7 @@
         </StackPanel>
         <DataGrid Name="dgView" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" Sorting="dgView_Sorting"  >
             <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Visibility="Hidden" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date,StringFormat={}{0:dd/MM/yyyy}}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Время" Binding="{Binding Time}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Откуда" Binding="{Binding Departure}" Width="*"></DataGridTextColumn>
