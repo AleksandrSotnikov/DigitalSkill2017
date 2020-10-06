@@ -31,11 +31,28 @@ namespace DigitalSkills2017
             cbSort.ItemsSource = dgView.Columns.ToList().Select(n => n.Header).ToList();
         }
 
+        //Не работаеты
         private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             dgView.Columns[cbSort.SelectedIndex].SortDirection= ListSortDirection.Ascending;
+            dgView_Sorting(dgView,new DataGridSortingEventArgs(dgView.Columns[2]));
             //dgView.Items.Refresh();
-           // dgView_Sorting(dgView, new DataGridSortingEventArgs());
+            // dgView_Sorting(dgView, new DataGridSortingEventArgs());
+        }
+
+        private void dgView_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+            this.Title = e.Column.Header.ToString();
+            //this.Title = ((DataGrid)sender).CurrentItem.ToString() ;
+            this.Title = sender.ToString();
+        }
+
+        private void FlightEdit_Click(object sender, RoutedEventArgs e)
+        {
+            // EditUser ed = new EditUser((Users)dgView.SelectedItem, this);
+            // ed.Show();
+            ShadulesEdit se = new ShadulesEdit(dgView.SelectedItem.ToString(), this);
+            se.Show();
         }
     }
 }

@@ -19,9 +19,26 @@ namespace DigitalSkills2017
     /// </summary>
     public partial class ShadulesEdit : Window
     {
-        public ShadulesEdit()
+        ManageFly _window;
+        public ShadulesEdit(String schedules, ManageFly window)
         {
             InitializeComponent();
+            _window = window;
+            this.Title = schedules;
+            schedules = schedules.Substring(schedules.IndexOf("=")+2);
+            Date.Text = schedules.Substring(0,10);
+            schedules = schedules.Substring(schedules.IndexOf("=")+2);
+            Time.Text = schedules.Substring(0,8);
+            schedules = schedules.Substring(schedules.IndexOf("=") + 2);
+            From.Text = "From: "+ schedules.Substring(0, 3);
+            schedules = schedules.Substring(schedules.IndexOf("=") + 2);
+            To.Text =   "To: " + schedules.Substring(0, 3);
+            schedules = schedules.Substring(schedules.IndexOf("=") + 2);
+            schedules = schedules.Substring(schedules.IndexOf("=") + 2);
+            Aircraft.Text = "Aircraft: " + schedules.Substring(0,schedules.IndexOf(","));
+            schedules = schedules.Substring(schedules.IndexOf("=") + 2);
+            Price.Text =schedules.Substring(0, schedules.IndexOf(","));
+
         }
     }
 }
