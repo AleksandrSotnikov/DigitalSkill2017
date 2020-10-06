@@ -34,5 +34,7 @@ namespace DigitalSkills2017
         public virtual DbSet<Airports> Airports { get; set; }
         public virtual DbSet<Routes> Routes { get; set; }
         public virtual DbSet<Schedules> Schedules { get; set; }
+        public virtual DbSet<CabinTypes> CabinTypes { get; set; }
+        public virtual DbSet<Tickets> Tickets { get; set; }
     }
 }
