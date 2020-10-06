@@ -31,7 +31,7 @@ namespace DigitalSkills2017
             cbSort.ItemsSource = dgView.Columns.ToList().Select(n => n.Header).ToList();
         }
 
-        //Не работаеты
+        //Не работает
         private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             dgView.Columns[cbSort.SelectedIndex].SortDirection= ListSortDirection.Ascending;
@@ -39,20 +39,37 @@ namespace DigitalSkills2017
             //dgView.Items.Refresh();
             // dgView_Sorting(dgView, new DataGridSortingEventArgs());
         }
-
+        //Не работает
         private void dgView_Sorting(object sender, DataGridSortingEventArgs e)
         {
             this.Title = e.Column.Header.ToString();
             //this.Title = ((DataGrid)sender).CurrentItem.ToString() ;
             this.Title = sender.ToString();
-        }
+        }    
 
         private void FlightEdit_Click(object sender, RoutedEventArgs e)
         {
-            // EditUser ed = new EditUser((Users)dgView.SelectedItem, this);
-            // ed.Show();
             ShadulesEdit se = new ShadulesEdit(dgView.SelectedItem.ToString(), this);
             se.Show();
+        }
+
+        
+
+        private void FlightCancel_Click(object sender, RoutedEventArgs e)
+        {
+            string schedules = dgView.SelectedItem.ToString().Substring(dgView.SelectedItem.ToString().IndexOf("=") + 2, dgView.SelectedItem.ToString().IndexOf(",")- dgView.SelectedItem.ToString().IndexOf("=") - 2);
+            int _ID = int.Parse(schedules);
+            Schedules _sc = Manager.db.Schedules.FirstOrDefault(n => n.ID == _ID);
+            _sc.Confirmed = !_sc.Confirmed;
+            Manager.db.SaveChanges();
+        }
+
+        private void dgView_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            string row = e.Row.Item.ToString().Substring(e.Row.Item.ToString().IndexOf("=") + 2, e.Row.Item.ToString().IndexOf(",")-e.Row.Item.ToString().IndexOf("=") -2 );
+            int _ID = int.Parse(row);
+            Schedules _sc = Manager.db.Schedules.FirstOrDefault(n => n.ID == _ID);
+            e.Row.Background =_sc.Confirmed ? new SolidColorBrush(Colors.White):new SolidColorBrush(Colors.Red) ;  
         }
     }
 }
