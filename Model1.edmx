@@ -25,6 +25,13 @@
           <Property Name="IATACode" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="CabinTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Countries">
           <Key>
             <PropertyRef Name="ID" />
@@ -81,6 +88,23 @@
           <Property Name="EconomyPrice" Type="money" Nullable="false" />
           <Property Name="Confirmed" Type="bit" Nullable="false" />
           <Property Name="FlightNumber" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ScheduleID" Type="int" Nullable="false" />
+          <Property Name="CabinTypeID" Type="int" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="PassportNumber" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="PassportCountryID" Type="int" Nullable="false" />
+          <Property Name="BookingReference" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Confirmed" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -168,6 +192,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Ticket_Schedule">
+          <End Role="Schedules" Type="Self.Schedules" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedules">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="ScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_TravelClass">
+          <End Role="CabinTypes" Type="Self.CabinTypes" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CabinTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="CabinTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_LOGIN">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="LoginUsers" Type="Self.LoginUsers" Multiplicity="*" />
@@ -207,12 +255,14 @@
         <EntityContainer Name="Хранилище dbDigitalSkills2017ModelContainer">
           <EntitySet Name="Aircrafts" EntityType="Self.Aircrafts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Airports" EntityType="Self.Airports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CabinTypes" EntityType="Self.CabinTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginUsers" EntityType="Self.LoginUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Routes" EntityType="Self.Routes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedules" EntityType="Self.Schedules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AirPort_Country" Association="Self.FK_AirPort_Country">
             <End Role="Countries" EntitySet="Countries" />
@@ -237,6 +287,14 @@
           <AssociationSet Name="FK_Schedule_Routes" Association="Self.FK_Schedule_Routes">
             <End Role="Routes" EntitySet="Routes" />
             <End Role="Schedules" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Schedule" Association="Self.FK_Ticket_Schedule">
+            <End Role="Schedules" EntitySet="Schedules" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_TravelClass" Association="Self.FK_Ticket_TravelClass">
+            <End Role="CabinTypes" EntitySet="CabinTypes" />
+            <End Role="Tickets" EntitySet="Tickets" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_LOGIN" Association="Self.FK_Users_LOGIN">
             <End Role="Users" EntitySet="Users" />
@@ -406,6 +464,16 @@
             <End Role="Routes" EntitySet="Routes" />
             <End Role="Schedules" EntitySet="Schedules" />
           </AssociationSet>
+          <EntitySet Name="CabinTypes" EntityType="dbDigitalSkills2017Model.CabinTypes" />
+          <EntitySet Name="Tickets" EntityType="dbDigitalSkills2017Model.Tickets" />
+          <AssociationSet Name="FK_Ticket_TravelClass" Association="dbDigitalSkills2017Model.FK_Ticket_TravelClass">
+            <End Role="CabinTypes" EntitySet="CabinTypes" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Schedule" Association="dbDigitalSkills2017Model.FK_Ticket_Schedule">
+            <End Role="Schedules" EntitySet="Schedules" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Aircrafts">
           <Key>
@@ -458,6 +526,7 @@
           <Property Name="FlightNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Aircrafts" Relationship="dbDigitalSkills2017Model.FK_Schedule_AirCraft" FromRole="Schedules" ToRole="Aircrafts" />
           <NavigationProperty Name="Routes" Relationship="dbDigitalSkills2017Model.FK_Schedule_Routes" FromRole="Schedules" ToRole="Routes" />
+          <NavigationProperty Name="Tickets" Relationship="dbDigitalSkills2017Model.FK_Ticket_Schedule" FromRole="Schedules" ToRole="Tickets" />
         </EntityType>
         <Association Name="FK_Schedule_AirCraft">
           <End Type="dbDigitalSkills2017Model.Aircrafts" Role="Aircrafts" Multiplicity="1" />
@@ -516,6 +585,57 @@
             </Principal>
             <Dependent Role="Schedules">
               <PropertyRef Name="RouteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CabinTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tickets" Relationship="dbDigitalSkills2017Model.FK_Ticket_TravelClass" FromRole="CabinTypes" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleID" Type="Int32" Nullable="false" />
+          <Property Name="CabinTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="PassportNumber" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="PassportCountryID" Type="Int32" Nullable="false" />
+          <Property Name="BookingReference" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Confirmed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CabinTypes" Relationship="dbDigitalSkills2017Model.FK_Ticket_TravelClass" FromRole="Tickets" ToRole="CabinTypes" />
+          <NavigationProperty Name="Schedules" Relationship="dbDigitalSkills2017Model.FK_Ticket_Schedule" FromRole="Tickets" ToRole="Schedules" />
+        </EntityType>
+        <Association Name="FK_Ticket_TravelClass">
+          <End Type="dbDigitalSkills2017Model.CabinTypes" Role="CabinTypes" Multiplicity="1" />
+          <End Type="dbDigitalSkills2017Model.Tickets" Role="Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CabinTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="CabinTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Schedule">
+          <End Type="dbDigitalSkills2017Model.Schedules" Role="Schedules" Multiplicity="1" />
+          <End Type="dbDigitalSkills2017Model.Tickets" Role="Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedules">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="ScheduleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -621,6 +741,32 @@
                 <ScalarProperty Name="AircraftID" ColumnName="AircraftID" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CabinTypes">
+            <EntityTypeMapping TypeName="dbDigitalSkills2017Model.CabinTypes">
+              <MappingFragment StoreEntitySet="CabinTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="dbDigitalSkills2017Model.Tickets">
+              <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
+                <ScalarProperty Name="BookingReference" ColumnName="BookingReference" />
+                <ScalarProperty Name="PassportCountryID" ColumnName="PassportCountryID" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="CabinTypeID" ColumnName="CabinTypeID" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

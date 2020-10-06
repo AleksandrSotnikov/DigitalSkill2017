@@ -23,6 +23,10 @@
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Routes_Airports2" />
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Routes_Airports3" />
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Schedule_Routes" />
+        <EntityTypeShape EntityType="dbDigitalSkills2017Model.CabinTypes" Width="1.5" PointX="9.75" PointY="5.125" />
+        <EntityTypeShape EntityType="dbDigitalSkills2017Model.Tickets" Width="1.5" PointX="12" PointY="8.125" />
+        <AssociationConnector Association="dbDigitalSkills2017Model.FK_Ticket_TravelClass" />
+        <AssociationConnector Association="dbDigitalSkills2017Model.FK_Ticket_Schedule" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
