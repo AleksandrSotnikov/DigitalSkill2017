@@ -107,6 +107,9 @@
     <Compile Include="Schedules.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ShadulesAdd.xaml.cs">
+      <DependentUpon>ShadulesAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShadulesEdit.xaml.cs">
       <DependentUpon>ShadulesEdit.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ManageFly.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShadulesAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

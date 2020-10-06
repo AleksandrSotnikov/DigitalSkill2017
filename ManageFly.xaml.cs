@@ -71,5 +71,10 @@ namespace DigitalSkills2017
             Schedules _sc = Manager.db.Schedules.FirstOrDefault(n => n.ID == _ID);
             e.Row.Background =_sc.Confirmed ? new SolidColorBrush(Colors.White):new SolidColorBrush(Colors.Red) ;  
         }
+
+        private void SchedulesAdd_Click(object sender, RoutedEventArgs e)
+        {
+            new ShadulesAdd().Show();
+        }
     }
 }
