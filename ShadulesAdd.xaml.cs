@@ -39,7 +39,6 @@ namespace DigitalSkills2017
                 int miss = 0;
                 for(int i = 0; i < s.Length; i++)
                 {
-                    this.Title = s[i];
                     string[] q = s[i].Split(',');
                     if (q[0] == "ADD")
                     {
@@ -53,7 +52,7 @@ namespace DigitalSkills2017
                             schedules.Date = Convert.ToDateTime(q[1]);
                             schedules.Time = new TimeSpan(Convert.ToDateTime(q[2]).Ticks % 864000000000);
                             schedules.FlightNumber = q[3];
-                            this.Title = q[4];
+                            //this.Title = q[4];
                             var q1 = q[4].ToString();
                             var q2 = q[5].ToString();
                             int airports = Manager.db.Airports.FirstOrDefault(n => n.IATACode == q1).ID;
@@ -63,7 +62,8 @@ namespace DigitalSkills2017
                             schedules.AircraftID = Convert.ToInt32(q[6]);
                             q[7] = q[7].Substring(0, q[7].IndexOf('.'));
                             schedules.EconomyPrice = Convert.ToDecimal(q[7]);
-                            schedules.Confirmed = !(q[8] == "OK");
+                            //this.Title = q[8];
+                            schedules.Confirmed = (q[8].Contains("OK"));
                             Manager.db.Schedules.Add(schedules);
                         }
                         catch
@@ -74,7 +74,10 @@ namespace DigitalSkills2017
                     }
                     if (q[0] == "EDIT")
                     {
-
+                        DateTime dt = Convert.ToDateTime(q[1]);
+                        TimeSpan ts = new TimeSpan(Convert.ToDateTime(q[2]).Ticks % 864000000000);
+                        Schedules schedules = Manager.db.Schedules.FirstOrDefault(n => n.Date == dt&&n.Time==ts);
+                        schedules.Confirmed = !schedules.Confirmed;
                     }
                 }
                 Manager.db.SaveChanges();
