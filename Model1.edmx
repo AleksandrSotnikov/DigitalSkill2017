@@ -89,6 +89,16 @@
           <Property Name="Confirmed" Type="bit" Nullable="false" />
           <Property Name="FlightNumber" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Tickets">
           <Key>
             <PropertyRef Name="ID" />
@@ -192,18 +202,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Ticket_Schedule">
-          <End Role="Schedules" Type="Self.Schedules" Multiplicity="1" />
-          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Schedules">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Tickets">
-              <PropertyRef Name="ScheduleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Ticket_TravelClass">
           <End Role="CabinTypes" Type="Self.CabinTypes" Multiplicity="1" />
           <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
@@ -262,6 +260,7 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Routes" EntityType="Self.Routes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedules" EntityType="Self.Schedules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AirPort_Country" Association="Self.FK_AirPort_Country">
@@ -287,10 +286,6 @@
           <AssociationSet Name="FK_Schedule_Routes" Association="Self.FK_Schedule_Routes">
             <End Role="Routes" EntitySet="Routes" />
             <End Role="Schedules" EntitySet="Schedules" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ticket_Schedule" Association="Self.FK_Ticket_Schedule">
-            <End Role="Schedules" EntitySet="Schedules" />
-            <End Role="Tickets" EntitySet="Tickets" />
           </AssociationSet>
           <AssociationSet Name="FK_Ticket_TravelClass" Association="Self.FK_Ticket_TravelClass">
             <End Role="CabinTypes" EntitySet="CabinTypes" />
@@ -474,6 +469,7 @@
             <End Role="Schedules" EntitySet="Schedules" />
             <End Role="Tickets" EntitySet="Tickets" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="dbDigitalSkills2017Model.sysdiagrams" />
         </EntityContainer>
         <EntityType Name="Aircrafts">
           <Key>
@@ -639,6 +635,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -768,6 +774,17 @@
                 <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbDigitalSkills2017Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

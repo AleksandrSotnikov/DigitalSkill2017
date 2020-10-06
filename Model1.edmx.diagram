@@ -27,6 +27,7 @@
         <EntityTypeShape EntityType="dbDigitalSkills2017Model.Tickets" Width="1.5" PointX="12" PointY="8.125" />
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Ticket_TravelClass" />
         <AssociationConnector Association="dbDigitalSkills2017Model.FK_Ticket_Schedule" />
+        <EntityTypeShape EntityType="dbDigitalSkills2017Model.sysdiagrams" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -36,5 +36,6 @@ namespace DigitalSkills2017
         public virtual DbSet<Schedules> Schedules { get; set; }
         public virtual DbSet<CabinTypes> CabinTypes { get; set; }
         public virtual DbSet<Tickets> Tickets { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

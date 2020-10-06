@@ -25,16 +25,16 @@
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="From:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,17,0,0"/>
-            <ComboBox Name="FromComboBox" DisplayMemberPath="Name" ItemsSource="{Binding IATAcode}" Grid.Row="0" Grid.Column="0" Margin="70,20,19.6,0" Height="21" VerticalAlignment="Top"/>
+            <ComboBox Name="FromComboBox" DisplayMemberPath="Name" ItemsSource="{Binding IATACode}" Grid.Row="0" Grid.Column="0" Margin="70,20,19.6,0" Height="21" VerticalAlignment="Top"/>
 
             <TextBlock Grid.Row="0" Grid.Column="1" Text="To:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10.4,17,0,0"/>
-            <ComboBox Name="ToComboBox" DisplayMemberPath="Name" Grid.Row="0" Grid.Column="1" Margin="70.4,20,20.2,0" Height="21" VerticalAlignment="Top"/>
+            <ComboBox Name="ToComboBox" DisplayMemberPath="Name" Grid.Row="0"   ItemsSource="{Binding IATACode}" Grid.Column="1" Margin="70.4,20,20.2,0" Height="21" VerticalAlignment="Top"/>
 
             <TextBlock Grid.Row="0" Grid.Column="2" Text="Cabin type:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="9.8,17,0,0"/>
-            <ComboBox Name="CabinTypeComboBox" DisplayMemberPath="Name" Grid.Row="0" Grid.Column="2" Margin="99.8,20,20,0" Height="21" VerticalAlignment="Top"/>
+            <ComboBox Name="CabinTypeComboBox" DisplayMemberPath="Name" Grid.Row="0" ItemsSource="{Binding Name}" Grid.Column="2" Margin="99.8,20,20,0" Height="21" VerticalAlignment="Top"/>
 
-            <RadioButton x:Name="ReturnRadio" Grid.Row="1" Content="Return" VerticalAlignment="Bottom" Margin="50,0,129.6,15.2"/>
-            <RadioButton x:Name="OneWayRadio" IsChecked="True" Grid.Row="1" Content="One way" VerticalAlignment="Bottom" Margin="119,0,49.6,15.2" />
+            <RadioButton x:Name="ReturnRadio" Grid.Row="1" Content="Return" VerticalAlignment="Bottom" Margin="15,5,5,5"/>
+            <RadioButton x:Name="OneWayRadio" IsChecked="True" Grid.Row="1" Content="One way" VerticalAlignment="Bottom" Margin="100,5,5,5" />
 
             <TextBlock Grid.Row="1" Grid.Column="1" Text="Outbound:" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10.4,0,0,9.6"/>
             <DatePicker Name="OutboundDatePicker" Grid.Row="1" Grid.Column="1" Margin="100.4,0,20.2,9.2" Height="23" VerticalAlignment="Bottom"/>

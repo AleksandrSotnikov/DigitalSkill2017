@@ -22,6 +22,10 @@ namespace DigitalSkills2017
         public SearchFly()
         {
             InitializeComponent();
+            Manager.db = new dbDigitalSkills2017Entities();
+            FromComboBox.ItemsSource = Manager.db.Airports.ToList();
+            ToComboBox.ItemsSource = Manager.db.Airports.ToList();
+            CabinTypeComboBox.ItemsSource = Manager.db.CabinTypes.ToList();
         }
     }
 }
