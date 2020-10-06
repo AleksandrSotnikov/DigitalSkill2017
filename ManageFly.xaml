@@ -15,17 +15,17 @@
         <StackPanel Orientation="Vertical" Margin="10" Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Text="Откуда: " Margin="5"></TextBlock>
-                <ComboBox Name="cbFrom"  Width="150" ItemsSource="{Binding IATACode}" Height="20" Margin="5"></ComboBox>
+                <ComboBox Name="cbFrom"  Width="150" ItemsSource="{Binding IATACode}" SelectionChanged="cbFrom_SelectionChanged" Height="20" Margin="5"></ComboBox>
                 <TextBlock Text="Куда: " Margin="5"></TextBlock>
-                <ComboBox Name="cbTo" Width="150" Height="20" ItemsSource="{Binding IATACode}" Margin="5"></ComboBox>
+                <ComboBox Name="cbTo" Width="150" Height="20" ItemsSource="{Binding IATACode}" SelectionChanged="cbTo_SelectionChanged" Margin="5"></ComboBox>
                 <TextBlock Text="Сортировать по: " Margin="5"></TextBlock>
                 <ComboBox Name ="cbSort" SelectionChanged="cbSort_SelectionChanged" Width="150" Height="20" Margin="5"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Text="Дата: " Margin="5"></TextBlock>
-                <TextBox  Width="150" Height="20" Margin="5"></TextBox>
+                <DatePicker Width="150" Name="OutboundDatePicker" Grid.Row="1" Grid.Column="1" Margin="5" Height="25" SelectedDateChanged="OutboundDatePicker_SelectedDateChanged"/>
                 <TextBlock Text="Номер рейса: " Margin="5"></TextBlock>
-                <ComboBox Name="cbNumber" Width="150" ItemsSource="{Binding FlightNumber}" Height="20" Margin="5"></ComboBox>
+                <ComboBox Name="cbNumber" Width="150" ItemsSource="{Binding FlightNumber}" SelectionChanged="cbNumber_SelectionChanged" Height="20" Margin="5"></ComboBox>
                 <Button Content="Принять" Width="150" Height="20" Margin="75,5,5,5" HorizontalAlignment="Right"></Button>
             </StackPanel>
         </StackPanel>

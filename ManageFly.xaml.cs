@@ -78,5 +78,25 @@ namespace DigitalSkills2017
         {
             new ShadulesAdd().Show();
         }
+
+        private void cbFrom_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dgView.ItemsSource = Manager.db.Schedules.Where(n=> cbFrom.SelectedItem == n.Routes.Airports.IATACode).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+        }
+
+        private void cbTo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dgView.ItemsSource = Manager.db.Schedules.Where(n => cbTo.SelectedItem == n.Routes.Airports1.IATACode).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+        }
+
+        private void cbNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dgView.ItemsSource = Manager.db.Schedules.Where(n => cbNumber.SelectedItem == n.FlightNumber).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+        }
+
+        private void OutboundDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dgView.ItemsSource = Manager.db.Schedules.Where(n => OutboundDatePicker.SelectedDate == n.Date).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+        }
     }
 }
