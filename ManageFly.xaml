@@ -26,7 +26,7 @@
                 <DatePicker Width="150" Name="OutboundDatePicker" Grid.Row="1" Grid.Column="1" Margin="5" Height="25" SelectedDateChanged="OutboundDatePicker_SelectedDateChanged"/>
                 <TextBlock Text="Номер рейса: " Margin="5"></TextBlock>
                 <ComboBox Name="cbNumber" Width="150" ItemsSource="{Binding FlightNumber}" SelectionChanged="cbNumber_SelectionChanged" Height="20" Margin="5"></ComboBox>
-                <Button Content="Принять" Width="150" Height="20" Margin="75,5,5,5" HorizontalAlignment="Right"></Button>
+                <Button Content="Принять" Width="150" Height="20" Click ="Button_Click" Margin="75,5,5,5" HorizontalAlignment="Right"></Button>
             </StackPanel>
         </StackPanel>
         <DataGrid Name="dgView" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" LoadingRow="dgView_LoadingRow" Sorting="dgView_Sorting"  >

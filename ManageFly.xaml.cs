@@ -98,5 +98,14 @@ namespace DigitalSkills2017
         {
             dgView.ItemsSource = Manager.db.Schedules.Where(n => OutboundDatePicker.SelectedDate == n.Date).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbFrom.SelectedIndex >= 0 && cbTo.SelectedIndex>0 && cbNumber.SelectedIndex>0)
+                dgView.ItemsSource = Manager.db.Schedules
+                    .Where(n => cbNumber.SelectedItem == n.FlightNumber && cbTo.SelectedItem == n.Routes.Airports1.IATACode && cbFrom.SelectedItem == n.Routes.Airports.IATACode)
+                    .Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) })
+                    .ToList();
+        }
     }
 }
