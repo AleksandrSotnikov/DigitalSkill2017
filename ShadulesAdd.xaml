@@ -11,7 +11,7 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="Please select the text file with the changes:" Margin="10" Height="30" VerticalAlignment="Top"/>
+        <TextBlock Grid.Row="0" Text="Please select the text file with the changes:" Margin="10" Height="30" VerticalAlignment="Top"/>
         <TextBox Grid.Row="0" Margin="40,40,200,0" Height="30" VerticalAlignment="Top"/>
         <Button x:Name="ImportChangesButton" Grid.Row="0" Margin="420,40,70,0" Content="Import changes" Height="30" VerticalAlignment="Top" Click="ImportChangesButton_Click"/>
         <Border BorderBrush="Gray" Grid.Row="1" Margin="20" BorderThickness="1"/>
@@ -29,9 +29,9 @@
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Duplicate Records Discarded:" HorizontalAlignment="Left" Margin="10" Height="30" VerticalAlignment="Center" />
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Record with missing fields discarded:" HorizontalAlignment="Left" Margin="10" Height="30" VerticalAlignment="Center" />
 
-            <TextBlock Name="SuccessfulLabel" Grid.Row="0" Grid.Column="1" Text="" HorizontalAlignment="Left" Margin="10" Height="30" VerticalAlignment="Center" />
-            <TextBlock Name="DublicateLabel" Grid.Row="1" Grid.Column="1" Text="" HorizontalAlignment="Left" Margin="10" Height="30" VerticalAlignment="Center" />
-            <TextBlock Name="RecordLabel" Grid.Row="2" Grid.Column="1" Text="" HorizontalAlignment="Left" Margin="10" Height="30" VerticalAlignment="Center" />
+            <TextBlock Name="SuccessfulTextBlock" Grid.Row="0" Grid.Column="1" Text="" HorizontalAlignment="Left" Margin="10" Height="30" VerticalAlignment="Center" />
+            <TextBlock Name="DublicateTextBlock" Grid.Row="1" Grid.Column="1" Text="" HorizontalAlignment="Left" Margin="10" Height="30" VerticalAlignment="Center" />
+            <TextBlock Name="RecordTextBlock" Grid.Row="2" Grid.Column="1" Text="" HorizontalAlignment="Left" Margin="10" Height="30" VerticalAlignment="Center" />
         </Grid>
     </Grid>
 </Window>

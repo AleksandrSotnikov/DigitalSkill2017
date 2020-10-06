@@ -48,7 +48,6 @@ namespace DigitalSkills2017
                             schedules.Date = Convert.ToDateTime(q[1]);
                             schedules.Time = new TimeSpan(Convert.ToDateTime(q[2]).Ticks % 864000000000);
                             schedules.FlightNumber = q[3];
-                            //this.Title = q[4];
                             var q1 = q[4].ToString();
                             var q2 = q[5].ToString();
                             int airports = Manager.db.Airports.FirstOrDefault(n => n.IATACode == q1).ID;
@@ -58,7 +57,6 @@ namespace DigitalSkills2017
                             schedules.AircraftID = Convert.ToInt32(q[6]);
                             q[7] = q[7].Substring(0, q[7].IndexOf('.'));
                             schedules.EconomyPrice = Convert.ToDecimal(q[7]);
-                            //this.Title = q[8];
                             schedules.Confirmed = (q[8].Contains("OK"));
                             Manager.db.Schedules.Add(schedules);
                         }
@@ -77,7 +75,7 @@ namespace DigitalSkills2017
                     }
                 }
                 Manager.db.SaveChanges();
-                RecordLabel.Text = miss.ToString();
+                RecordTextBlock.Text = miss.ToString();
                 fileIn.Close();
             }
         }
