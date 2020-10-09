@@ -37,17 +37,26 @@ namespace DigitalSkills2017
                 StreamReader fileIn = new StreamReader(new FileStream(oFD.FileName.ToString(), FileMode.Open, FileAccess.Read));
                 string[] s = fileIn.ReadToEnd().Split('\n');
                 int miss = 0;
-                for(int i = 0; i < s.Length; i++)
+                int duplicate = 0;
+                int successful = 0;
+                for (int i = 0; i < s.Length; i++)
                 {
                     string[] q = s[i].Split(',');
                     if (q[0] == "ADD")
                     {                      
                         try
                         {
-                            Schedules schedules = new Schedules();
-                            schedules.Date = Convert.ToDateTime(q[1]);
-                            schedules.Time = new TimeSpan(Convert.ToDateTime(q[2]).Ticks % 864000000000);
-                            schedules.FlightNumber = q[3];
+                            DateTime dateTime = Convert.ToDateTime(q[1]);
+                            string flightNumber = q[3];
+                            TimeSpan time = new TimeSpan(Convert.ToDateTime(q[2]).Ticks % 864000000000);
+                            if (Manager.db.Schedules.FirstOrDefault(n=> dateTime == n.Date && n.Time == time && n.FlightNumber== flightNumber) !=null) {
+                                DublicateTextBlock.Text = duplicate++.ToString();
+                                goto Finish;
+                            }
+                             Schedules schedules = new Schedules();
+                            schedules.Date = dateTime;
+                            schedules.Time = time;
+                            schedules.FlightNumber = flightNumber;
                             var q1 = q[4].ToString();
                             var q2 = q[5].ToString();
                             int airports = Manager.db.Airports.FirstOrDefault(n => n.IATACode == q1).ID;
@@ -59,6 +68,8 @@ namespace DigitalSkills2017
                             schedules.EconomyPrice = Convert.ToDecimal(q[7]);
                             schedules.Confirmed = (q[8].Contains("OK"));
                             Manager.db.Schedules.Add(schedules);
+                            SuccessfulTextBlock.Text = successful++.ToString();
+                            Finish: { }
                         }
                         catch
                         {

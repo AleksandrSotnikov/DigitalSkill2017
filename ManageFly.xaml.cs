@@ -26,8 +26,8 @@ namespace DigitalSkills2017
             Manager.db = new dbDigitalSkills2017Entities();
             dgView.ItemsSource = Manager.db.Schedules.Select(n => new {n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
             cbFrom.ItemsSource = Manager.db.Airports.Select(n => n.IATACode).ToList();
-            cbTo.ItemsSource = Manager.db.Airports.Select(n => n.IATACode).ToList();
-            cbNumber.ItemsSource = Manager.db.Schedules.Select(n => n.FlightNumber).Distinct().ToList();
+            //cbTo.ItemsSource = Manager.db.Airports.Select(n => n.IATACode).ToList();
+            //cbNumber.ItemsSource = Manager.db.Schedules.Select(n => n.FlightNumber).Distinct().ToList();
             cbSort.ItemsSource = dgView.Columns.ToList().Select(n => n.Header).ToList();
         }
 
@@ -81,27 +81,34 @@ namespace DigitalSkills2017
 
         private void cbFrom_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dgView.ItemsSource = Manager.db.Schedules.Where(n=> cbFrom.SelectedItem == n.Routes.Airports.IATACode).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+            // dgView.ItemsSource = Manager.db.Schedules.Where(n => cbFrom.SelectedItem == n.Routes.Airports.IATACode).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+            cbTo.ItemsSource = Manager.db.Routes.Where(n=>n.Airports.IATACode == cbFrom.SelectedItem).Select(n => n.Airports1.IATACode).Distinct().ToList();
+            cbNumber.ItemsSource = Manager.db.Schedules.Where(n => n.Routes.Airports.IATACode == cbFrom.SelectedItem).Select(n => n.FlightNumber).Distinct().ToList();
+            cbTo.SelectedIndex = -1;
+            cbNumber.SelectedIndex = -1;
+
         }
 
         private void cbTo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dgView.ItemsSource = Manager.db.Schedules.Where(n => cbTo.SelectedItem == n.Routes.Airports1.IATACode).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+          //  dgView.ItemsSource = Manager.db.Schedules.Where(n => cbTo.SelectedItem == n.Routes.Airports1.IATACode).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+          cbNumber.ItemsSource = Manager.db.Schedules.Where(n=>n.Routes.Airports.IATACode == cbFrom.SelectedItem && n.Routes.Airports1.IATACode == cbTo.SelectedItem).Select(n => n.FlightNumber).Distinct().ToList();
+            cbNumber.SelectedIndex = -1;
         }
 
         private void cbNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dgView.ItemsSource = Manager.db.Schedules.Where(n => cbNumber.SelectedItem == n.FlightNumber).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+           // dgView.ItemsSource = Manager.db.Schedules.Where(n => cbNumber.SelectedItem == n.FlightNumber).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
         }
 
         private void OutboundDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            dgView.ItemsSource = Manager.db.Schedules.Where(n => OutboundDatePicker.SelectedDate == n.Date).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
+           // dgView.ItemsSource = Manager.db.Schedules.Where(n => OutboundDatePicker.SelectedDate == n.Date).Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) }).ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (cbFrom.SelectedIndex >= 0 && cbTo.SelectedIndex>0 && cbNumber.SelectedIndex>0)
+            if (cbFrom.SelectedIndex >= 0 && cbTo.SelectedIndex>=0 && cbNumber.SelectedIndex>=0)
                 dgView.ItemsSource = Manager.db.Schedules
                     .Where(n => cbNumber.SelectedItem == n.FlightNumber && cbTo.SelectedItem == n.Routes.Airports1.IATACode && cbFrom.SelectedItem == n.Routes.Airports.IATACode)
                     .Select(n => new { n.ID, n.Date, n.Time, Departure = n.Routes.Airports.IATACode, Arrival = n.Routes.Airports1.IATACode, n.FlightNumber, n.Aircrafts.MakeModel, n.EconomyPrice, Business = (n.EconomyPrice * (Decimal)1.3), First = (n.EconomyPrice * (Decimal)1.5) })
