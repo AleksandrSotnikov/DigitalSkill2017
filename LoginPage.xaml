@@ -19,12 +19,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Name="tbkLogin" Width="50" Height="24" Text="Login" Margin="10,17,0,20" HorizontalAlignment="Left" FontSize="14"></TextBlock>
-        <TextBox Name="tbxLogin" Text="a.hobart@amonic.com" Width="600" Height="24" Margin="0,10,0,10" HorizontalAlignment="Center" Grid.ColumnSpan="2"></TextBox>
+        <TextBox Name="tbxLogin" Text="j.doe@amonic.com" Width="600" Height="24" Margin="0,10,0,10" HorizontalAlignment="Center" Grid.ColumnSpan="2"></TextBox>
         <TextBlock Name="tbkPassword" Width="60" Height="24" Text="Password" Margin="10,18,0,19" HorizontalAlignment="Left" FontSize="14" Grid.Row="1"/>
-        <TextBox Name="tbxPassword" Text="6996" Width="600" Height="24" Margin="0,10,0,10" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <TextBox Name="tbxPassword" Text="123" Width="600" Height="24" Margin="0,10,0,10" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1"/>
         <Button Name="btnLogin"  Content="Login" Margin="80,10,80,10"  Grid.Row="2" Grid.Column="0" Click="btnLogin_Click"></Button>
         <Button Name="btnExit" Content="Exit" Margin="80,10,80,10"  Grid.Row="2" Grid.Column="1" Click="btnExit_Click"></Button>
-        
+        <TextBlock Name="tbTime" Width="60" Height="24" Text="" Margin="366,20,0,17" HorizontalAlignment="Left" FontSize="14" Grid.Row="2" Grid.ColumnSpan="2" RenderTransformOrigin="0.566,-0.31"/>
 
     </Grid>
 </Page>

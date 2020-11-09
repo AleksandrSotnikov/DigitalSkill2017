@@ -28,10 +28,10 @@
             <ComboBox Name="FromComboBox" DisplayMemberPath="Name" ItemsSource="{Binding IATACode}" Grid.Row="0" Grid.Column="0" Margin="70,20,19.6,0" Height="21" VerticalAlignment="Top"/>
 
             <TextBlock Grid.Row="0" Grid.Column="1" Text="To:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10.4,17,0,0"/>
-            <ComboBox Name="ToComboBox" DisplayMemberPath="Name" Grid.Row="0"   ItemsSource="{Binding IATACode}" Grid.Column="1" Margin="70.4,20,20.2,0" Height="21" VerticalAlignment="Top"/>
+            <ComboBox Name="ToComboBox" DisplayMemberPath="Name" Grid.Row="0"   ItemsSource="{Binding IATACode}" Grid.Column="1" Margin="70.4,20,20.2,0" Height="21" VerticalAlignment="Top" SelectionChanged="ToComboBox_SelectionChanged"/>
 
             <TextBlock Grid.Row="0" Grid.Column="2" Text="Cabin type:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="9.8,17,0,0"/>
-            <ComboBox Name="CabinTypeComboBox" DisplayMemberPath="Name" Grid.Row="0" ItemsSource="{Binding Name}" Grid.Column="2" Margin="99.8,20,20,0" Height="21" VerticalAlignment="Top"/>
+            <ComboBox Name="CabinTypeComboBox" DisplayMemberPath="Name" Grid.Row="0" ItemsSource="{Binding Name}" Grid.Column="2" Margin="99.8,20,20,0" Height="21" VerticalAlignment="Top" SelectionChanged="CabinTypeComboBox_SelectionChanged"/>
 
             <RadioButton x:Name="ReturnRadio" Grid.Row="1" Content="Return" VerticalAlignment="Bottom" Margin="15,5,5,5"/>
             <RadioButton x:Name="OneWayRadio" IsChecked="True" Grid.Row="1" Content="One way" VerticalAlignment="Bottom" Margin="100,5,5,5" />
@@ -41,7 +41,7 @@
 
             <TextBlock Grid.Row="1" Grid.Column="2" Text="Return:" HorizontalAlignment="Left" Margin="9.8,0,0,9.8" Height="25" VerticalAlignment="Bottom"/>
             <DatePicker Name="ReturnDatePicker" Grid.Row="1" Grid.Column="2" Margin="99.8,0,20,9.2" Height="23" VerticalAlignment="Bottom"/>
-            <Button Grid.Column="3" Grid.Row="1" Name="ApplyButton" Content="Apply" Margin="10,0,10,10.8" Height="20" VerticalAlignment="Bottom"/>
+            <Button Grid.Column="3" Grid.Row="1" Name="ApplyButton" Content="Apply" Margin="10,0,10,10.8" Height="20" VerticalAlignment="Bottom" Click="ApplyButton_Click"/>
         </Grid>
         <DataGrid IsReadOnly="True" x:Name="OneWayScheduleData" AutoGenerateColumns="False" Margin="10,27.6,10,10.2" Grid.Row="1">
             <DataGrid.Columns>

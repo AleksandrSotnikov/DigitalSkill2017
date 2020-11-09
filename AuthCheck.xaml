@@ -18,7 +18,7 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding UserID}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Время входа" Binding="{Binding DateTimeLogin,StringFormat={}{0:hh:mm dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Время выхода" Binding="{Binding DateTimeExit,StringFormat={}{0:hh:mm dd.MM.yyyy}}" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Причина" Binding="{Binding Cause}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Причина" Binding="{Binding Reason}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Orientation="Horizontal">

@@ -32,9 +32,8 @@ namespace DigitalSkills2017
 
         private void dgView_LoadingRow(object sender, DataGridRowEventArgs e)
         {
-            if (((LoginUsers)e.Row.Item).Cause == "Soft") e.Row.Background = new SolidColorBrush(Colors.Red);
-            if (((LoginUsers)e.Row.Item).Cause == "System") e.Row.Background = new SolidColorBrush(Colors.Green);
-
+            if (((LoginUsers)e.Row.Item).Reason != "Good") e.Row.Background = new SolidColorBrush(Colors.White);
+            if (((LoginUsers)e.Row.Item).Reason != "Good") e.Row.Background = new SolidColorBrush(Colors.Red);
         }
 
         private void Soft_Checked(object sender, RoutedEventArgs e)

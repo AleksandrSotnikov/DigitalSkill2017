@@ -48,6 +48,7 @@
           <Property Name="DateTimeLogin" Type="datetime" Nullable="false" />
           <Property Name="Cause" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="DateTimeExit" Type="datetime" Nullable="false" />
+          <Property Name="Reason" Type="nchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Offices">
           <Key>
@@ -364,6 +365,7 @@
           <Property Name="Cause" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateTimeExit" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_LOGIN" FromRole="LoginUsers" ToRole="Users" />
+          <Property Name="Reason" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
         </EntityType>
         <Association Name="FK_Office_Country">
           <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
@@ -696,6 +698,7 @@
           <EntitySetMapping Name="LoginUsers">
             <EntityTypeMapping TypeName="dbDigitalSkills2017Model.LoginUsers">
               <MappingFragment StoreEntitySet="LoginUsers">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="DateTimeLogin" ColumnName="DateTimeLogin" />

@@ -23,7 +23,8 @@ namespace DigitalSkills2017
         public AdminMenu(LoginUsers loginUsers)
         {
             InitializeComponent();
-            dgView.ItemsSource = Manager.db.Users.ToList();
+            DateTime t = DateTime.Now;
+            dgView.ItemsSource = Manager.db.Users.Select(n => new { n.FirstName, n.LastName, Age = (t.Month < n.Birthdate.Value.Month || (t.Month == n.Birthdate.Value.Month && t.Day < n.Birthdate.Value.Day))? (t.Year - n.Birthdate.Value.Year)-1: (t.Year - n.Birthdate.Value.Year), RolesTitles = n.Roles.Title, n.Email, OfficesTitles = n.Offices.Title, n.Active }).ToList();
             cbOffices.ItemsSource = Manager.db.Offices.ToList();
             _loginUsers = loginUsers;
         }
@@ -32,7 +33,7 @@ namespace DigitalSkills2017
         {
             Application.Current.MainWindow.Visibility = Visibility.Visible;
             _loginUsers.DateTimeExit = DateTime.Now;
-            _loginUsers.Cause = "System";
+            _loginUsers.Cause = "Good";
             Manager.db.SaveChanges();
             Close();
         }
@@ -44,7 +45,8 @@ namespace DigitalSkills2017
 
         private void cbOffice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dgView.ItemsSource = Manager.db.Users.Where(n => n.Offices.Title == ((Offices)((ComboBox)sender).SelectedItem).Title.ToString()).ToList();
+            var t = DateTime.Now;
+            dgView.ItemsSource = Manager.db.Users.Where(n => n.Offices.Title == ((Offices)((ComboBox)sender).SelectedItem).Title.ToString()).Select(n => new { n.FirstName, n.LastName, Age = (t.Month < n.Birthdate.Value.Month || (t.Month == n.Birthdate.Value.Month && t.Day < n.Birthdate.Value.Day)) ? (t.Year - n.Birthdate.Value.Year) - 1 : (t.Year - n.Birthdate.Value.Year), RolesTitles = n.Roles.Title, n.Email, OfficesTitles = n.Offices.Title, n.Active }).ToList();
         }
 
         private void EditRole_Click(object sender, RoutedEventArgs e)
@@ -60,8 +62,13 @@ namespace DigitalSkills2017
 
         private void dgView_LoadingRow(object sender, DataGridRowEventArgs e)
         {
-            if (((Users)e.Row.Item).Roles.Title == "Administrator") e.Row.Background = new SolidColorBrush(Colors.Green);
-            if (((Users)e.Row.Item).Active == false) e.Row.Background = new SolidColorBrush(Colors.Red);
+            //if (((Users)e.Row.Item).Roles.Title == "Administrator") e.Row.Background = new SolidColorBrush(Colors.Green);
+            //if (((Users)e.Row.Item).Active == false) e.Row.Background = new SolidColorBrush(Colors.Red); 
+            e.Row.Background = new SolidColorBrush(Colors.White);
+            if ((e.Row.Item.ToString().Contains("RolesTitles = Administrator"))) e.Row.Background = new SolidColorBrush(Colors.Green);
+            if ((e.Row.Item.ToString().Contains("Active = False"))) e.Row.Background = new SolidColorBrush(Colors.Red);
+           
+
         }
 
         private void btnActivate_Click(object sender, RoutedEventArgs e)

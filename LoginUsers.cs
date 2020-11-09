@@ -19,6 +19,7 @@ namespace DigitalSkills2017
         public System.DateTime DateTimeLogin { get; set; }
         public string Cause { get; set; }
         public System.DateTime DateTimeExit { get; set; }
+        public string Reason { get; set; }
     
         public virtual Users Users { get; set; }
     }

@@ -1,0 +1,24 @@
+﻿<Window x:Class="DigitalSkills2017.NoLogout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DigitalSkills2017"
+        mc:Ignorable="d"
+        Title="NoLogout" Height="488.273" Width="403.351">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Последние авторизации пользователей:" Margin ="5" Grid.Row="0" FontSize="18"></TextBlock>
+        <TextBox  Name ="Warnq"  Grid.Row="1">
+        </TextBox>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <RadioButton Name ="Soft" Content="Софт" Margin="50,10,10,10"></RadioButton>
+            <RadioButton Name ="Systems" Content="Система"  Margin="50,10,10,0"></RadioButton>
+            <Button Name="Confirm" Content="Confirm" Margin="50,0,10,0" Height="20" Width="100" Click="Confirm_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
